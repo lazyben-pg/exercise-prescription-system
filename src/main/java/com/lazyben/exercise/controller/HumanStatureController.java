@@ -19,11 +19,7 @@ public class HumanStatureController {
 
     @PostMapping("/humanstature")
     public String getHumanStature(@RequestBody HumanStature statureData) {
-//        System.out.println(111);
-//        System.out.println(statureData);
         double[] data = statureData.createData();
-        System.out.println(statureData);
-//        double[] data = new double[]{0., 18., 175., 53.9, 46.1, 49.3, 4.6, 8.5, 17.6, 11.2, 65.1, 1733.3};
         return Constant.HUMANSTATURES[humanStatureService.getHumanStature(data)];
     }
 }

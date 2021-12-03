@@ -26,11 +26,4 @@ public class HumanStatureService {
             throw new RuntimeException("人体体质模型调用失败");
         }
     }
-
-    public static void main(String[] args) {
-        // 0. 18. 175. 53.9 46.1 49.3 4.6 8.5 17.6 11.2 65.1 1733.3
-//        double[] data = new double[]{0., 18., 175., 53.9, 46.1, 49.3, 4.6, 8.5, 17.6, 11.2, 65.1, 1733.3};
-//        System.out.println(new HumanStatureService().getHumanStature(data));
-//        System.out.println(HumanStature.valueOf("STATURE0"));
-    }
 }
