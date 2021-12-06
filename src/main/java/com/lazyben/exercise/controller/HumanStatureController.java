@@ -17,7 +17,13 @@ public class HumanStatureController {
         this.humanStatureService = humanStatureService;
     }
 
-    @PostMapping("/humanstature")
+    /**
+     * 从 request body 中获取人体参数信息，并调用分类模型获取人体体质分类结果
+     *
+     * @param statureData 人体参数
+     * @return 人体体质分类结果
+     */
+    @PostMapping(path = "/humanstature")
     public String getHumanStature(@RequestBody HumanStature statureData) {
         double[] data = statureData.createData();
         return Constant.HUMANSTATURES[humanStatureService.getHumanStature(data)];

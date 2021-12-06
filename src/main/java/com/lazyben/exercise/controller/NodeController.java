@@ -6,12 +6,14 @@ import com.lazyben.exercise.service.NodeSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("search")
 public class NodeController {
     private final NodeSearchService nodeSearchService;
 
@@ -28,7 +30,7 @@ public class NodeController {
      * @param relationship 想要查找的关系
      * @return 查询结果
      */
-    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public SearchResult getMovieTitles(@RequestParam("symptom") String symptom,
                                        @RequestParam(value = "nodetype", required = false, defaultValue = Constant.DEFAULT_NODE_TYPE) String nodeType,
                                        @RequestParam("relationship") String relationship) {
