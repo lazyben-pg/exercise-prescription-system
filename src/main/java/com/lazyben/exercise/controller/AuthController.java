@@ -2,6 +2,7 @@ package com.lazyben.exercise.controller;
 
 import com.lazyben.exercise.entity.User;
 import com.lazyben.exercise.entity.UserResult;
+import com.lazyben.exercise.service.AuthService;
 import com.lazyben.exercise.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,24 +21,23 @@ import java.util.Map;
 @RestController
 public class AuthController {
     private final UserService userService;
+    private final AuthService authService;
     private final AuthenticationManager authenticationManager;
 
     @Autowired
     public AuthController(UserService userService,
+                          AuthService authService,
                           AuthenticationManager authenticationManager) {
         this.userService = userService;
+        this.authService = authService;
         this.authenticationManager = authenticationManager;
     }
 
     @GetMapping("/auth")
     public UserResult getIsLogin() {
-        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        final User loggedInUser = userService.getUserByUsername(username);
-        if (loggedInUser == null) {
-            return new UserResult(false, null, "ok", null);
-        } else {
-            return new UserResult(true, null, "ok", loggedInUser);
-        }
+        return authService.getCurrentUser()
+                .map((loggedInUser) -> new UserResult(true, null, "ok", loggedInUser))
+                .orElse(new UserResult(false, null, "ok", null));
     }
 
     @PostMapping("/auth/register")
@@ -48,21 +48,18 @@ public class AuthController {
         if (username.length() < 1 || username.length() > 15) return new UserResult("fail", "用户名长度不合法");
         if (password.length() < 6 || password.length() > 16) return new UserResult("fail", "密码长度不合法");
         final User user = userService.getUserByUsername(username);
-        if (user != null) return new UserResult("fail", "改用户名存在");
+        if (user != null) return new UserResult("fail", "该用户名存在");
         userService.save(username, password);
         return new UserResult(true, "注册成功", null, userService.getUserByUsername(username));
     }
 
     @GetMapping("/auth/logout")
     public UserResult logout() {
-        final String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        final User loggedInUser = userService.getUserByUsername(username);
-        if (loggedInUser == null) {
-            return new UserResult("fail", "用户尚未登陆");
-        } else {
-            SecurityContextHolder.clearContext();
-            return new UserResult("ok", "注销成功");
-        }
+        final UserResult userResult = authService.getCurrentUser()
+                .map((loggedInUser) -> new UserResult("ok", "注销成功"))
+                .orElse(new UserResult("fail", "用户尚未登陆"));
+        SecurityContextHolder.clearContext();
+        return userResult;
     }
 
     @PostMapping("/auth/login")

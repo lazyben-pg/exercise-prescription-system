@@ -14,21 +14,6 @@ public class HumanStature {
     private double standardWeight; // cal
     private double basalMetabolicRate; //give
 
-//    public HumanStature(int sexual, int age, double height, double weight, double muscleMass, double fatWeight, double fatPercentage, double BMI, double basalMetabolicRate) {
-//        this.sexual = sexual;
-//        this.age = age;
-//        this.height = height;
-//        this.weight = weight;
-//        this.muscleMass = muscleMass;
-//        this.leanBodyMass = weight - fatWeight;
-//        this.fatWeight = fatWeight;
-//        this.fatPercentage = fatPercentage;
-//        this.BMI = BMI;
-//        this.standardWeight = (height - (1 - age) * 80 - age * 70) * ((1 - age) * 0.7 + age * 0.6);
-//        this.weightControl = this.standardWeight - weight;
-//        this.basalMetabolicRate = basalMetabolicRate;
-//    }
-
     public int getSexual() {
         return sexual;
     }

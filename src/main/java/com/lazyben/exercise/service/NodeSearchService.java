@@ -40,10 +40,8 @@ public class NodeSearchService {
     private SearchResult getPrescriptionWithRelationShip(String symptom, String nodeType, String relationship) {
         try (Session session = driver.session()) {
             String cypher = cypherBuilder(nodeType, symptom, relationship);
-            System.out.println(cypher);
             final List<String> list = session.run(cypher)
                     .list(r -> r.get("m").asNode().get("name").asString());
-            System.out.println(list);
             return new SearchResult(symptom, nodeType, relationship, list);
         }
     }
