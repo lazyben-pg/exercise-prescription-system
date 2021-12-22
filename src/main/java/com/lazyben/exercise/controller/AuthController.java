@@ -45,8 +45,8 @@ public class AuthController {
         final String username = usernameAndPassword.get("username");
         final String password = usernameAndPassword.get("password");
         if (username == null || password == null) return new UserResult("fail", "用户名或密码为空");
-        if (username.length() < 1 || username.length() > 15) return new UserResult("fail", "用户名长度不合法");
-        if (password.length() < 6 || password.length() > 16) return new UserResult("fail", "密码长度不合法");
+        if (username.length() <= 1 || username.length() > 15) return new UserResult("fail", "用户名长度不合法");
+        if (password.length() <= 6 || password.length() > 16) return new UserResult("fail", "密码长度不合法");
         final User user = userService.getUserByUsername(username);
         if (user != null) return new UserResult("fail", "该用户名存在");
         userService.save(username, password);
@@ -75,6 +75,7 @@ public class AuthController {
         try {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
             authenticationManager.authenticate(token);
+            // cookie
             SecurityContextHolder.getContext().setAuthentication(token);
             return new UserResult(true, "登陆成功", "ok", userService.getUserByUsername(username));
         } catch (BadCredentialsException e) {

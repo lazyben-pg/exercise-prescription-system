@@ -1,6 +1,8 @@
 package com.lazyben.exercise.entity;
 
 public class HumanStature {
+    private int id;
+    private int userid;
     private int sexual; // give
     private int age; // give
     private double height; //give
@@ -13,6 +15,7 @@ public class HumanStature {
     private double weightControl; // cal
     private double standardWeight; // cal
     private double basalMetabolicRate; //give
+    private int stature;
 
     public int getSexual() {
         return sexual;
@@ -74,6 +77,30 @@ public class HumanStature {
         return bodyMassIndex;
     }
 
+    public double getLeanBodyMass() {
+        return leanBodyMass;
+    }
+
+    public void setLeanBodyMass(double leanBodyMass) {
+        this.leanBodyMass = leanBodyMass;
+    }
+
+    public double getWeightControl() {
+        return weightControl;
+    }
+
+    public void setWeightControl(double weightControl) {
+        this.weightControl = weightControl;
+    }
+
+    public double getStandardWeight() {
+        return standardWeight;
+    }
+
+    public void setStandardWeight(double standardWeight) {
+        this.standardWeight = standardWeight;
+    }
+
     public void setBodyMassIndex(double bodyMassIndex) {
         this.bodyMassIndex = bodyMassIndex;
     }
@@ -109,5 +136,29 @@ public class HumanStature {
                 ", standardWeight=" + standardWeight +
                 ", basalMetabolicRate=" + basalMetabolicRate +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public int getStature() {
+        return stature;
+    }
+
+    public void setStature(int stature) {
+        this.stature = stature;
     }
 }

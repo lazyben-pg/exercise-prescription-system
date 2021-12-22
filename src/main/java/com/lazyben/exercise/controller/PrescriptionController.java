@@ -1,37 +1,33 @@
 package com.lazyben.exercise.controller;
 
-import com.lazyben.exercise.entity.Constant;
-import com.lazyben.exercise.entity.HumanStature;
+import com.lazyben.exercise.entity.PrescriptionResult;
 import com.lazyben.exercise.entity.SearchResult;
-import com.lazyben.exercise.service.HumanStatureService;
-import com.lazyben.exercise.service.NodeSearchService;
+import com.lazyben.exercise.service.AuthService;
+import com.lazyben.exercise.service.PrescriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 public class PrescriptionController {
-    private final HumanStatureService humanStatureService;
-    private final NodeSearchService nodeSearchService;
+    private final PrescriptionService prescriptionService;
+    private final AuthService authService;
 
     @Autowired
-    public PrescriptionController(HumanStatureService humanStatureService, NodeSearchService nodeSearchService) {
-        this.humanStatureService = humanStatureService;
-        this.nodeSearchService = nodeSearchService;
+    public PrescriptionController(PrescriptionService prescriptionService,
+                                  AuthService authService) {
+        this.prescriptionService = prescriptionService;
+        this.authService = authService;
     }
 
-    @PostMapping(path = "/prescription", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<SearchResult> getPrescriptionFromHumanStatureData(@RequestBody HumanStature statureData) {
-        System.out.println(statureData);
-        double[] data = statureData.createData();
-        final String humanStature = Constant.HUMANSTATURES[humanStatureService.getHumanStature(data)];
-        if ("肥胖".equals(humanStature) || "超重".equals(humanStature)) {
-            return nodeSearchService.getPrescription("超重或超胖", Constant.DEFAULT_NODE_TYPE);
-        }
-        return null;
+    @GetMapping(path = "/prescription")
+    public PrescriptionResult getPrescription() {
+        return authService.getCurrentUser().map((loggedInUser) -> {
+            final List<SearchResult> prescriptions = prescriptionService.getPrescription(loggedInUser.getId());
+            if (prescriptions == null) return new PrescriptionResult("ok", "未查询到相应运动处方，请尝试录入问卷或体质数据");
+            return new PrescriptionResult("查询成功", "ok", prescriptions);
+        }).orElse(new PrescriptionResult("fail", "用户尚未登陆"));
     }
 }
