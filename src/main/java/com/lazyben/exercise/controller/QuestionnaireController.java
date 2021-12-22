@@ -43,7 +43,7 @@ public class QuestionnaireController {
     public QuestionnaireResult getQuestionnaire() {
         return authService.getCurrentUser().map((loggedInUser) -> {
             final List<Questionnaire> data = questionnaireService.getQuestionnaire(loggedInUser.getId());
-            if (data.isEmpty()) return new QuestionnaireResult("请先填写问卷", "ok");
+            if (data.isEmpty()) return new QuestionnaireResult("当前用户尚未填写问卷", "ok");
             return new QuestionnaireResult("查询成功", "ok", data);
         }).orElse(new QuestionnaireResult("用户未登陆", "fail"));
     }
