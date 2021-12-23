@@ -12,8 +12,8 @@ import sys
 # scaler_path = r'/Users/lazyben/Projects/exercise-prescription-system/src/main/resources/min_max_scaler.pkl'
 # model_state_dict_path = r'/Users/lazyben/Downloads/human_body_classification/checkpoints/_NN_epoch88_1109_16_19_13.pth'
 
-scaler_path = r'./min_max_scaler.pkl'
-model_state_dict_path = r'./_NN_epoch88_1109_16_19_13.pth'
+scaler_path = r'/Users/lazyben/Projects/exercise-prescription-system/src/main/resources/min_max_scaler.pkl'
+model_state_dict_path = r'/Users/lazyben/Projects/exercise-prescription-system/src/main/resources/_NN_epoch88_1109_16_19_13.pth'
 
 class Config(object):
     input_dim = 12

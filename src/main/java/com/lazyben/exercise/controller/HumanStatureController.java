@@ -48,7 +48,7 @@ public class HumanStatureController {
         return authService.getCurrentUser().map((loggedInUser) -> {
             List<HumanStature> humanStatures = humanStatureService.getHumanStature(loggedInUser.getId());
             humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
-            HumanStature humanStature = humanStatures.get(0);
+            HumanStature humanStature = humanStatures.isEmpty() ? null : humanStatures.get(0);
             if (humanStature != null) {
                 return new HumanStatureResult(true, null, "ok", humanStatures, Constant.HUMANSTATURES[humanStature.getStature()]);
             }

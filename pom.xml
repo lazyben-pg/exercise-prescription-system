@@ -125,8 +125,16 @@
 
     <build>
         <plugins>
-
-
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.4.0</version>
+                <configuration>
+                    <url>jdbc:mysql://192.168.1.134:3306/excercise_sys</url>
+                    <user>root</user>
+                    <password>123</password>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
