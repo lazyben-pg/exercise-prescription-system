@@ -32,4 +32,7 @@ public interface QuestionnaireMapper {
 
     @Select("select * from questionnaire where userid=#{userid}")
     List<Questionnaire> getQuestionnaire(int userid);
+
+    @Select("select * from questionnaire where id=#{id}")
+    Questionnaire getQuestionnaireById(int id);
 }

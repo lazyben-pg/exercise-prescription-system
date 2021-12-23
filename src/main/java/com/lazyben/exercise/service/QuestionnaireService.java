@@ -26,6 +26,14 @@ public class QuestionnaireService {
         return questionnaireMapper.getQuestionnaire(userid);
     }
 
+    public List<Questionnaire> getQuestionnaireById(int id) {
+        Questionnaire questionnaire = questionnaireMapper.getQuestionnaireById(id);
+        if (questionnaire == null) return null;
+        final List<Questionnaire> result = new ArrayList<>();
+        result.add(questionnaire);
+        return result;
+    }
+
     public Integer analyseSymptom(String[] result) {
         List<Integer> Symptom = new ArrayList<>();
         if (result[0].equals("A")) Symptom.add(0);//"孕妇"

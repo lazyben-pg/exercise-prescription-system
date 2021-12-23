@@ -6,10 +6,7 @@ import com.lazyben.exercise.entity.QuestionnaireResult;
 import com.lazyben.exercise.service.AuthService;
 import com.lazyben.exercise.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -38,11 +35,23 @@ public class QuestionnaireController {
         }).orElse(QuestionnaireResult.failure("用户未登陆"));
     }
 
-    @GetMapping("/questionnaire")
+    @GetMapping("/questionnaires")
     public QuestionnaireResult getQuestionnaire() {
         return authService.getCurrentUser().map((loggedInUser) -> {
             final List<Questionnaire> data = questionnaireService.getQuestionnaire(loggedInUser.getId());
             if (data.isEmpty()) return QuestionnaireResult.success("当前用户尚未填写问卷");
+            return QuestionnaireResult.success("查询成功", data);
+        }).orElse(QuestionnaireResult.failure("用户未登陆"));
+    }
+
+    @RequestMapping("/questionnaire")
+    public QuestionnaireResult getQuestionnaireById(@RequestParam("id") int id) {
+        System.out.println(id);
+        return authService.getCurrentUser().map((loggedInUser) -> {
+            final List<Questionnaire> data = questionnaireService.getQuestionnaireById(id);
+            if (data == null) return QuestionnaireResult.success("未查询到id为" + id + "的问卷信息");
+            if (data.get(0).getUserid() != loggedInUser.getId())
+                return QuestionnaireResult.success("id为" + id + "的问卷非当前用户的问卷");
             return QuestionnaireResult.success("查询成功", data);
         }).orElse(QuestionnaireResult.failure("用户未登陆"));
     }
