@@ -10,6 +10,7 @@
 - Spring Security
 - MyBatis
 - Mysql
+- flyway
 - Jython
 - Neo4j
 ## 文档
