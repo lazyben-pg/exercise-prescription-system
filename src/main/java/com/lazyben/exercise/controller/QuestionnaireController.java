@@ -3,7 +3,6 @@ package com.lazyben.exercise.controller;
 import com.lazyben.exercise.entity.Constant;
 import com.lazyben.exercise.entity.Questionnaire;
 import com.lazyben.exercise.entity.QuestionnaireResult;
-import com.lazyben.exercise.entity.Result;
 import com.lazyben.exercise.service.AuthService;
 import com.lazyben.exercise.service.QuestionnaireService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class QuestionnaireController {
     }
 
     @PostMapping("/questionnaire")
-    public Result createQuestionnaire(@RequestBody Map<String, String> questionnaire) {
+    public QuestionnaireResult createQuestionnaire(@RequestBody Map<String, String> questionnaire) {
         String[] result = new String[Constant.Questionnaire_Count];
         for (int i = 0; i < Constant.Questionnaire_Count; i++) {
             result[i] = questionnaire.get("q" + (i + 1));
@@ -35,16 +34,16 @@ public class QuestionnaireController {
 
         return authService.getCurrentUser().map((loggedInUser) -> {
             questionnaireService.createQuestionnaire(loggedInUser.getId(), result);
-            return new Result("问卷记录成功", "ok");
-        }).orElse(new Result("用户未登陆", "fail"));
+            return QuestionnaireResult.success("问卷记录成功");
+        }).orElse(QuestionnaireResult.failure("用户未登陆"));
     }
 
     @GetMapping("/questionnaire")
     public QuestionnaireResult getQuestionnaire() {
         return authService.getCurrentUser().map((loggedInUser) -> {
             final List<Questionnaire> data = questionnaireService.getQuestionnaire(loggedInUser.getId());
-            if (data.isEmpty()) return new QuestionnaireResult("当前用户尚未填写问卷", "ok");
-            return new QuestionnaireResult("查询成功", "ok", data);
-        }).orElse(new QuestionnaireResult("用户未登陆", "fail"));
+            if (data.isEmpty()) return QuestionnaireResult.success("当前用户尚未填写问卷");
+            return QuestionnaireResult.success("查询成功", data);
+        }).orElse(QuestionnaireResult.failure("用户未登陆"));
     }
 }

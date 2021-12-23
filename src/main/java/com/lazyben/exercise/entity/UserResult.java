@@ -1,35 +1,30 @@
 package com.lazyben.exercise.entity;
 
-public class UserResult {
+public class UserResult extends Result<User> {
     private final boolean isLogin;
-    private final String msg;
-    private final String status;
-    private final User data;
 
-    public UserResult(boolean isLogin, String msg, String status, User data) {
+    private UserResult(boolean isLogin, String msg, ResultStatus status, User data) {
+        super(msg, status, data);
         this.isLogin = isLogin;
-        this.msg = msg;
-        this.status = status;
-        this.data = data;
-    }
-
-    public UserResult(String status, String msg) {
-        this(false, msg, status, null);
     }
 
     public boolean isIsLogin() {
         return isLogin;
     }
 
-    public String getStatus() {
-        return status;
+    public static UserResult failure(String msg) {
+        return new UserResult(false, msg, ResultStatus.FAIL, null);
     }
 
-    public User getData() {
-        return data;
+    public static UserResult success(String msg, User data) {
+        return new UserResult(true, msg, ResultStatus.OK, data);
     }
 
-    public String getMsg() {
-        return msg;
+    public static UserResult success(boolean isLogin, String msg) {
+        return new UserResult(isLogin, msg, ResultStatus.OK, null);
+    }
+
+    public static UserResult success(String msg) {
+        return new UserResult(false, msg, ResultStatus.OK, null);
     }
 }

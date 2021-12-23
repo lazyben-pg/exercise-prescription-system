@@ -36,28 +36,28 @@ public class AuthController {
     @GetMapping("/auth")
     public UserResult getIsLogin() {
         return authService.getCurrentUser()
-                .map((loggedInUser) -> new UserResult(true, null, "ok", loggedInUser))
-                .orElse(new UserResult(false, null, "ok", null));
+                .map((loggedInUser) -> UserResult.success(null, loggedInUser))
+                .orElse(UserResult.success(false, null));
     }
 
     @PostMapping("/auth/register")
     public UserResult register(@RequestBody Map<String, String> usernameAndPassword) {
         final String username = usernameAndPassword.get("username");
         final String password = usernameAndPassword.get("password");
-        if (username == null || password == null) return new UserResult("fail", "用户名或密码为空");
-        if (username.length() <= 1 || username.length() > 15) return new UserResult("fail", "用户名长度不合法");
-        if (password.length() <= 6 || password.length() > 16) return new UserResult("fail", "密码长度不合法");
+        if (username == null || password == null) return UserResult.failure("用户名或密码为空");
+        if (username.length() <= 1 || username.length() > 15) return UserResult.failure("用户名长度不合法");
+        if (password.length() <= 6 || password.length() > 16) return UserResult.failure("密码长度不合法");
         final User user = userService.getUserByUsername(username);
-        if (user != null) return new UserResult("fail", "该用户名存在");
+        if (user != null) return UserResult.failure("改用户名已存在");
         userService.save(username, password);
-        return new UserResult(true, "注册成功", null, userService.getUserByUsername(username));
+        return UserResult.success("注册成功", userService.getUserByUsername(username));
     }
 
     @GetMapping("/auth/logout")
     public UserResult logout() {
         final UserResult userResult = authService.getCurrentUser()
-                .map((loggedInUser) -> new UserResult("ok", "注销成功"))
-                .orElse(new UserResult("fail", "用户尚未登陆"));
+                .map((loggedInUser) -> UserResult.success("注销成功"))
+                .orElse(UserResult.failure("用户尚未登陆"));
         SecurityContextHolder.clearContext();
         return userResult;
     }
@@ -70,16 +70,16 @@ public class AuthController {
         try {
             userDetails = userService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e) {
-            return new UserResult("fail", "用户不存在");
+            return UserResult.failure("用户不存在");
         }
         try {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
             authenticationManager.authenticate(token);
             // cookie
             SecurityContextHolder.getContext().setAuthentication(token);
-            return new UserResult(true, "登陆成功", "ok", userService.getUserByUsername(username));
+            return UserResult.success("登陆成功", userService.getUserByUsername(username));
         } catch (BadCredentialsException e) {
-            return new UserResult("fail", "密码不正确");
+            return UserResult.failure("密码不正确");
         }
     }
 }

@@ -39,8 +39,8 @@ public class HumanStatureController {
             statureData.setUserid(loggedInUser.getId());
             final List<HumanStature> humanStatures = humanStatureService.createHumanStature(data, statureData);
             humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
-            return new HumanStatureResult(true, "模型调用成功", "ok", humanStatures, Constant.HUMANSTATURES[humanStatures.get(0).getStature()]);
-        }).orElse(new HumanStatureResult("fail", "用户尚未登陆"));
+            return HumanStatureResult.success("模型调用成功", humanStatures, Constant.HUMANSTATURES[humanStatures.get(0).getStature()]);
+        }).orElse(HumanStatureResult.failure("用户尚未登陆"));
     }
 
     @GetMapping(path = "/humanstature")
@@ -50,9 +50,9 @@ public class HumanStatureController {
             humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
             HumanStature humanStature = humanStatures.isEmpty() ? null : humanStatures.get(0);
             if (humanStature != null) {
-                return new HumanStatureResult(true, null, "ok", humanStatures, Constant.HUMANSTATURES[humanStature.getStature()]);
+                return HumanStatureResult.success("获取体质参数成功", humanStatures, Constant.HUMANSTATURES[humanStature.getStature()]);
             }
-            return new HumanStatureResult("ok", "用户尚未录入数据");
-        }).orElse(new HumanStatureResult("fail", "用户尚未登陆"));
+            return HumanStatureResult.success("用户尚未录入数据");
+        }).orElse(HumanStatureResult.failure("用户尚未登陆"));
     }
 }

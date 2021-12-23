@@ -1,19 +1,25 @@
 package com.lazyben.exercise.entity;
 
-public class Result {
+public abstract class Result<T> {
     private final String msg;
-    private final String status;
+    private final ResultStatus status;
+    private final T data;
 
-    public Result(String msg, String status) {
+    public Result(String msg, ResultStatus status, T data) {
         this.msg = msg;
         this.status = status;
+        this.data = data;
     }
 
-    public String getStatus() {
+    public ResultStatus getStatus() {
         return status;
     }
 
     public String getMsg() {
         return msg;
+    }
+
+    public T getData() {
+        return data;
     }
 }

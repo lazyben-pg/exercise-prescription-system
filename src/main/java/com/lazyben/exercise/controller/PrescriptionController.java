@@ -26,8 +26,8 @@ public class PrescriptionController {
     public PrescriptionResult getPrescription() {
         return authService.getCurrentUser().map((loggedInUser) -> {
             final List<SearchResult> prescriptions = prescriptionService.getPrescription(loggedInUser.getId());
-            if (prescriptions == null) return new PrescriptionResult("ok", "未查询到相应运动处方，请尝试录入问卷或体质数据");
-            return new PrescriptionResult("查询成功", "ok", prescriptions);
-        }).orElse(new PrescriptionResult("fail", "用户尚未登陆"));
+            if (prescriptions == null) return PrescriptionResult.success("未查询到相应运动处方，请尝试录入问卷或体质数据");
+            return PrescriptionResult.success("查询成功", prescriptions);
+        }).orElse(PrescriptionResult.failure("用户尚未登陆"));
     }
 }

@@ -2,31 +2,20 @@ package com.lazyben.exercise.entity;
 
 import java.util.List;
 
-public class PrescriptionResult {
-    private final String msg;
-    private final String status;
-    private final List<SearchResult> data;
-
-    public PrescriptionResult(String msg, String status, List<SearchResult> data) {
-        this.msg = msg;
-        this.status = status;
-        this.data = data;
+public class PrescriptionResult extends Result<List<SearchResult>> {
+    public PrescriptionResult(String msg, ResultStatus status, List<SearchResult> data) {
+        super(msg, status, data);
     }
 
-    public PrescriptionResult(String status, String msg) {
-        this(msg, status, null);
+    public static PrescriptionResult failure(String msg) {
+        return new PrescriptionResult(msg, ResultStatus.FAIL, null);
     }
 
-
-    public String getMsg() {
-        return msg;
+    public static PrescriptionResult success(String msg, List<SearchResult> data) {
+        return new PrescriptionResult(msg, ResultStatus.OK, data);
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public List<SearchResult> getData() {
-        return data;
+    public static PrescriptionResult success(String msg) {
+        return new PrescriptionResult(msg, ResultStatus.OK, null);
     }
 }
