@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
+import java.util.List;
+
 @RestController
 public class HumanStatureController {
     private final HumanStatureService humanStatureService;
@@ -34,17 +37,20 @@ public class HumanStatureController {
         return authService.getCurrentUser().map((loggedInUser) -> {
             double[] data = statureData.createData();
             statureData.setUserid(loggedInUser.getId());
-            final HumanStature humanStature = humanStatureService.createHumanStature(data, statureData);
-            return new HumanStatureResult(true, "模型调用成功", "ok", humanStature, Constant.HUMANSTATURES[humanStature.getStature()]);
+            final List<HumanStature> humanStatures = humanStatureService.createHumanStature(data, statureData);
+            humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
+            return new HumanStatureResult(true, "模型调用成功", "ok", humanStatures, Constant.HUMANSTATURES[humanStatures.get(0).getStature()]);
         }).orElse(new HumanStatureResult("fail", "用户尚未登陆"));
     }
 
     @GetMapping(path = "/humanstature")
     public HumanStatureResult getHumanStature() {
         return authService.getCurrentUser().map((loggedInUser) -> {
-            HumanStature humanStature = humanStatureService.getHumanStature(loggedInUser.getId());
+            List<HumanStature> humanStatures = humanStatureService.getHumanStature(loggedInUser.getId());
+            humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
+            HumanStature humanStature = humanStatures.get(0);
             if (humanStature != null) {
-                return new HumanStatureResult(true, null, "ok", humanStature, Constant.HUMANSTATURES[humanStature.getStature()]);
+                return new HumanStatureResult(true, null, "ok", humanStatures, Constant.HUMANSTATURES[humanStature.getStature()]);
             }
             return new HumanStatureResult("ok", "用户尚未录入数据");
         }).orElse(new HumanStatureResult("fail", "用户尚未登陆"));

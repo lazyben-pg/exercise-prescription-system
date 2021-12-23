@@ -1,5 +1,7 @@
 package com.lazyben.exercise.entity;
 
+import java.sql.Timestamp;
+
 public class HumanStature {
     private int id;
     private int userid;
@@ -16,6 +18,7 @@ public class HumanStature {
     private double standardWeight; // cal
     private double basalMetabolicRate; //give
     private int stature;
+    private Timestamp createdAt;
 
     public int getSexual() {
         return sexual;
@@ -118,6 +121,14 @@ public class HumanStature {
         this.standardWeight = (height - (1 - sexual) * 80 - sexual * 70) * ((1 - sexual) * 0.7 + sexual * 0.6);
         this.weightControl = this.standardWeight - weight;
         return new double[]{sexual, age, height, weight, muscleMass, leanBodyMass, fatWeight, fatPercentage, bodyMassIndex, weightControl, standardWeight, basalMetabolicRate};
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
     @Override

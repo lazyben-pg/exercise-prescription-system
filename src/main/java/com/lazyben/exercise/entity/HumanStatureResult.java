@@ -1,18 +1,20 @@
 package com.lazyben.exercise.entity;
 
+import java.util.List;
+
 public class HumanStatureResult {
     private final boolean isLogin;
     private final String msg;
     private final String status;
     private final String stature;
-    private final HumanStature data;
+    private final List<HumanStature> data;
 
-    public HumanStatureResult(boolean isLogin, String msg, String status, HumanStature data, String stature) {
+    public HumanStatureResult(boolean isLogin, String msg, String status, List<HumanStature> data, String stature) {
         this.isLogin = isLogin;
         this.msg = msg;
         this.status = status;
-        this.data = data;
         this.stature = stature;
+        this.data = data;
     }
 
     public HumanStatureResult(String status, String msg) {
@@ -27,15 +29,19 @@ public class HumanStatureResult {
         return status;
     }
 
-    public HumanStature getData() {
-        return data;
-    }
-
     public String getMsg() {
         return msg;
     }
 
     public String getStature() {
         return stature;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public List<HumanStature> getData() {
+        return data;
     }
 }

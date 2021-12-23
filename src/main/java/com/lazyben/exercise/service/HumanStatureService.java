@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class HumanStatureService {
@@ -20,7 +21,7 @@ public class HumanStatureService {
         this.statureMapper = statureMapper;
     }
 
-    public HumanStature createHumanStature(double[] data, HumanStature humanStature) {
+    public List<HumanStature> createHumanStature(double[] data, HumanStature humanStature) {
         try {
             String[] arguments = new String[14];
             arguments[0] = "python3";
@@ -55,7 +56,7 @@ public class HumanStatureService {
         }
     }
 
-    public HumanStature getHumanStature(int userid) {
+    public List<HumanStature> getHumanStature(int userid) {
         return statureMapper.getStatureByUserId(userid);
     }
 }

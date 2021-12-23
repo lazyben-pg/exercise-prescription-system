@@ -6,13 +6,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface StatureMapper {
     @Select("SELECT * FROM userinfo where userid=#{userid}")
-    HumanStature getStatureByUserId(@Param("userid") int userid);
+    List<HumanStature> getStatureByUserId(@Param("userid") int userid);
 
-    @Insert("INSERT INTO userinfo(userid, sexual, age, height, weight, muscle_mass, lean_body_mass, fat_weight, fat_percentage, body_mass_index, weight_control, standard_weight, basal_metabolic_rate, stature) " +
-            "VALUES(#{userid}, #{sexual}, #{age}, #{height}, #{weight}, #{muscleMass}, #{leanBodyMass}, #{fatWeight}, #{fatPercentage}, #{bodyMassIndex}, #{weightControl}, #{standardWeight}, #{basalMetabolicRate}, #{stature})")
+    @Insert("INSERT INTO userinfo(userid, sexual, age, height, weight, muscle_mass, lean_body_mass, fat_weight, fat_percentage, body_mass_index, weight_control, standard_weight, basal_metabolic_rate, stature, created_at) " +
+            "VALUES(#{userid}, #{sexual}, #{age}, #{height}, #{weight}, #{muscleMass}, #{leanBodyMass}, #{fatWeight}, #{fatPercentage}, #{bodyMassIndex}, #{weightControl}, #{standardWeight}, #{basalMetabolicRate}, #{stature}, now())")
     void createHumanStature(@Param("userid") int userid,
                             @Param("sexual") int sexual,
                             @Param("age") int age,
