@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Basic Table | Creative - Bootstrap 3 Responsive Admin Template</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div>
+    <!-- container section start -->
+    <section id="container">
+            <!--header start-->
+            <header class="header dark-bg">
+                <div class="toggle-nav">
+                    <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom">
+                    </div>
+                </div>
+                <!--logo start-->
+                <a href="index.html" class="logo">运动处方 <span class="lite">系统</span></a>
+                <!--logo end-->
+
+                <div id="vuemain">
+                    <div class="top-nav notification-row">
+                        <!-- notificatoin dropdown start-->
+                        <ul class="nav pull-right top-menu">
+                            <!-- user login dropdown start-->
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <span class="profile-ava">
+                                        <img alt="" src="img/avatar1_small.jpg">
+                                    </span>
+                                    <span class="username">{{username}}</span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu extended logout">
+                                    <div class="log-arrow-up"></div>
+                                    <li>
+                                        <a href="login.html"><i class="icon_key_alt"></i> 退出</a>
+                                    </li>
+                                    <li>
+                                        <a href="documentation.html"><i class="icon_key_alt"></i> 修改密码</a>
+                                    </li>
+                                    <li>
+                                        <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- user login dropdown end -->
+                        </ul>
+                        <!-- notificatoin dropdown end-->
+                    </div>
+                </div>
+
+            </header>
+            <!--header end-->
+
+            <!--sidebar start-->
+
+
+            <aside>
+                <div id="sidebar"  class="nav-collapse "  font-size= 5px>
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu">                
+                        <li class="active">
+                            <a class="" href="index.html">
+                                <i class="icon_house_alt"></i>
+                                <span  style="font-size:14px">运动处方管理系统</span>
+                            </a>
+                        </li>
+                                <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_document_alt"></i>
+                                <span style="font-size:13px">个人身体状况调查</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">
+                                <li><a class="" href="questionBody.html"> <span style="font-size:14px">个人健康状况调查   </span></a></li>                          
+                                <li><a class="" href="questionBody.html"> <span style="font-size:14px">中医体质调查    </span></a></li>
+                            </ul>
+                        </li>       
+                
+                        <li>
+                            <a class="" href="bodyDataAdd.html">
+                                <i class="icon_genius"></i> 
+                                <span style="font-size:14px">个人体质数据录入</span>
+                            </a>
+                        </li>
+                        <li>                     
+                        <a class="" href="bodyDataManage.html">
+                            <i class="icon_piechart"></i>
+                            <span style="font-size:13px" >运动健康管理</span>                     
+                        </a>                                    
+                    </li>
+                                
+                    <li class="sub-menu">
+                        <a href="javascript:;" class="">
+                            <i class="icon_document_alt"></i>
+                            <span style="font-size:13px">当前运动处方</span>
+                            <span class="menu-arrow arrow_carrot-right"></span>
+                        </a>
+                        <ul class="sub">
+                            <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
+                            <li><a class="" href="#"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
+                        </ul>
+                    </li>  
+                    
+                    <li>
+                        <a class="" href="feedBackQuestion.html">
+                            <i class="icon_genius"></i> 
+                            <span style="font-size:14px">个人反馈问卷</span>
+                        </a>
+                    </li>
+                        
+                        <li class="sub-menu">
+                            <a href="javascript:;" class="">
+                                <i class="icon_documents_alt"></i>
+                                <span>Pages</span>
+                                <span class="menu-arrow arrow_carrot-right"></span>
+                            </a>
+                            <ul class="sub">                          
+                                <li><a class="" href="profile.html">Profile</a></li>
+                                <li><a class="" href="login.html"><span>Login Page</span></a></li>
+                                <li><a class="" href="blank.html">Blank Page</a></li>
+                                <li><a class="" href="404.html">404 Error</a></li>
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                    <!-- sidebar menu end-->
+                </div>
+            </aside>
+
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3 class="page-header"><i class="fa fa-table"></i>处方管理</h3>
+                        <ol class="breadcrumb">
+                            <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                            <li><i class="fa fa-table"></i>Table</li>
+                            <li><i class="fa fa-th-list"></i> 个人运动处方管理</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- page start-->
+            
+               <div  id="QuestionnareTable">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    个人运动处方管理
+                                </header>
+                                <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>日期</th>
+                                        <th>个人问卷调查</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(item,index) in this.info">
+                                        <td>{{index+1}}</td>
+                                        <td>{{item.createdAt}}</td> 
+                                        <td>
+                                            <!-- <a href="./showBodyQuestionnare.html?id='{{item.qid}}'">点击查看</a> -->
+                                            <a :href="getGoodsHref(item.qid)">点击查看</a>
+                                            <!-- <router-link :to="{name:'Index', params: { userId: 123 }}">link</router-link> -->
+                                        </td>              
+                                    </tr>                                               
+                                    </tbody>                      
+                                </table>
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+
+                </div>
+            
+            </section>
+            </section>
+        <!--main content end-->
+    </section>
+</div>
+    <!-- container section end -->
+    <!-- javascripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- nicescroll -->
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="js/scripts.js"></script>
+
+
+
+    <!--遍历处方  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script type="text/javascript">
+       axios.defaults.withCredentials = true
+        var apiUrl = 'http://192.168.1.175:8080/questionnaires'
+         
+        function formatDate(now) { 
+            return Date(parseInt(now) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        }   
+        var vm = new Vue({
+            el: '#QuestionnareTable',
+            data: {
+                info:[
+                    // {qid:'',
+                    //  createdAt:''
+                    // }
+                ]
+                
+            },
+            methods: {
+                GetHostData: function () {
+                    _this=this
+                   this.username=JSON.parse(sessionStorage.getItem("username")); 
+                   console.log(this.username)
+                    axios({
+                        url: apiUrl,
+                        method: "get",
+                        xhrFields: {withCredentials: true}
+                    }).then(function(response){
+						//console.log(response.data.data)
+                        var QuestionData=response.data.data
+                        _this.info = []
+
+                        for(var i=0;i<QuestionData.length;i++){
+                            console.log(QuestionData[i]['createdAt'])
+                            //  console.log(Date(parseInt(QuestionData[i]['createdAt']) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ')) 
+                            _this.info[i] = {
+                                qid : QuestionData[i]['id'],
+                                createdAt:QuestionData[i]['createdAt']
+                            }
+                        }
+                        // console.log('打印重组信息')
+                        // console.log(_this.info)
+
+					})
+
+                },
+                getGoodsHref:function(val){
+	                 return './showBodyQuestionnare.html?id='+val
+            	}
+
+     
+            },
+            created() {   //自动触发写入的函数
+                this.GetHostData();
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

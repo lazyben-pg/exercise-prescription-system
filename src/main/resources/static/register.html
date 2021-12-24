@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>运动处方注册界面</title>
+  <meta name="description" content="particles.js is a lightweight JavaScript library for creating particles.">
+  <meta name="author" content="Vincent Garreau" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" media="screen" href="css/register_style.css">
+  <link rel="stylesheet" type="text/css" href="css/register_reset.css"/>
+</head>
+<body>
+
+
+
+ <div id="particles-js">
+	<div id="checkregister">
+		<div class="login">
+			<div class="login-top">
+				注册
+			</div>
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="img/name.png"/></div>
+				<div class="login-center-input">
+					<input type="text"  placeholder="请输入您的用户名"   v-model.number='user.username'   onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+					<div class="login-center-input-text">用户名</div>
+				</div>
+			</div>
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="img/password.png"/></div>
+				<div class="login-center-input">
+					<input type="password"  placeholder="请输入您的密码"   v-model.number='user.password'   onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'"/>
+					<div class="login-center-input-text">密码</div>
+				</div>
+			</div>
+			<div class="login-center clearfix">
+				<div class="login-center-img"><img src="img/password.png"/></div>
+				<div class="login-center-input">
+					<input type="password"  placeholder="确认密码"     v-model.number='user.repassword'     onfocus="this.placeholder=''" onblur="this.placeholder='确认密码'"/>
+					<div class="login-center-input-text">密码</div>
+					<span style="color: red;"><p>两次密码不一致</p></span>
+				</div>
+			</div>
+			<div class="login-button"  v-on:click="register">
+				注册
+			</div>
+            <div class="login-button" v-on:click="login" >登录</div>
+		</div>
+		<div class="sk-rotating-plane"></div>
+	</div>
+</div>
+
+<!-- 注册 -->
+ <!--遍历处方  -->
+
+ <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+ <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+ <script type="text/javascript">
+	 var apiUrl = 'http://192.168.1.134:8080/auth/register';
+	 var defaultUrl='index.html';
+	 var logintUrl='login.html';
+
+
+	 var vm = new Vue({
+		 el: '#checkregister',
+		 data: {
+			 user: {
+				username:'',
+				password:'',
+			 },
+			 repassword:''
+
+		 },
+		 methods: {
+			 register: function () {
+				 console.log("11111");
+                if(this.user.password==this.user.repassword){
+					console.log(JSON.stringify(this.user))
+					axios({
+							url: apiUrl,
+							method: "post",
+							data : JSON.stringify(this.user),
+							headers: {
+								"Content-Type": "application/json"
+							}
+						}).then(function(response){
+						if(response.data.status=='ok'){
+							console.log("2222");
+							console.log(response.data.msg);
+						
+							sessionStorage.setItem('username',JSON.stringify(response.data.data.username));
+							console.log(JSON.parse(sessionStorage.getItem('username')));
+							alert("注册成功");
+						}else{
+							alert(response.data.msg);
+						}
+
+						})
+
+				}else{
+					alert("密码不一致")
+				}
+				
+			 },
+			  login:function(){
+			  window.open(logintUrl,'_self')
+			}
+		 }
+		
+	   
+	 });
+ </script>
+
+<!-- scripts -->
+<script src="js/register_particles.min.js"></script>
+<script src="js/register_app.js"></script>
+<!-- <script type="text/javascript">
+	function hasClass(elem, cls) {
+	  cls = cls || '';
+	  if (cls.replace(/\s/g, '').length == 0) return false; //当cls没有参数时，返回false
+	  return new RegExp(' ' + cls + ' ').test(' ' + elem.className + ' ');
+	}
+	 
+	function addClass(ele, cls) {
+	  if (!hasClass(ele, cls)) {
+	    ele.className = ele.className == '' ? cls : ele.className + ' ' + cls;
+	  }
+	}
+	 
+	function removeClass(ele, cls) {
+	  if (hasClass(ele, cls)) {
+	    var newClass = ' ' + ele.className.replace(/[\t\r\n]/g, '') + ' ';
+	    while (newClass.indexOf(' ' + cls + ' ') >= 0) {
+	      newClass = newClass.replace(' ' + cls + ' ', ' ');
+	    }
+	    ele.className = newClass.replace(/^\s+|\s+$/g, '');
+	  }
+	}
+		document.querySelector(".login-button").onclick = function(){
+				addClass(document.querySelector(".login"), "active")
+				setTimeout(function(){
+					addClass(document.querySelector(".sk-rotating-plane"), "active")
+					document.querySelector(".login").style.display = "none"
+				},800)
+				setTimeout(function(){
+					removeClass(document.querySelector(".login"), "active")
+					removeClass(document.querySelector(".sk-rotating-plane"), "active")
+					document.querySelector(".login").style.display = "block"
+					alert("注册成功")
+					
+				},4000)
+		}
+</script> -->
+
+</body>
+</html>

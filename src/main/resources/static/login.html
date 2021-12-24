@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
+
+    <!-- Bootstrap CSS -->    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+  <body class="login-img3-body">
+  
+    <div class="container">
+    <div  id="checklogin" >
+
+      <div class="login-form">        
+        <div class="login-wrap">
+            <p class="login-img"><i class="icon_lock_alt"></i></p>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon_profile"></i></span>
+              <input type="text" class="form-control"   v-model.number='user.username'   placeholder="用户名" autofocus>
+            </div>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+                <input type="password" class="form-control"   v-model.number='user.password'  placeholder="密码">
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+            </label>
+            <button class="btn btn-primary btn-lg btn-block" type="submit"  v-on:click="send" >登录</button>
+            <button class="btn btn-info btn-lg btn-block" type="submit" v-on:click="register"> 注册</button>
+        </div>
+      </div>
+
+    </div>
+    </div>
+
+
+    <!--遍历处方  -->
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script type="text/javascript">
+        var apiUrl = 'http://192.168.1.175:8080/auth/login';
+        var defaultUrl='index.html';
+        var registertUrl='register.html';
+        axios.defaults.withCredentials=true
+
+
+        var vm = new Vue({
+            el: '#checklogin',
+            data: {
+                user: {
+                   username:'',
+                   password:''
+                }
+            },
+            methods: {
+                send: function () {
+                    console.log("11111");
+                      // sessionStorage.setItem('username',JSON.stringify(response.data.username));
+                    //sessionStorage.setItem('username',JSON.stringify("许仁"));
+                    //console.log(JSON.parse(sessionStorage.getItem('username')));
+                    _this = this
+                    axios({
+                        url: apiUrl,
+                        method: "post",
+                        data : JSON.stringify(this.user),
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }).then(function(response){
+                      if(response.data.status=='OK'){
+                        console.log("2222");
+                        console.log(response)
+                        console.log(response.data.msg);
+                        //console.log(response.data.data.username);
+                        sessionStorage.setItem('username',JSON.stringify(response.data.data.username));
+                        console.log(_this.user);
+                        sessionStorage.setItem('password',JSON.stringify(_this.user.password));
+                        // cookies.set('username',JSON.stringify(response.data.data.username)
+                        console.log(JSON.parse(sessionStorage.getItem('username')));
+
+
+                        console.log(response.data)
+                        //cookieStorage.setItem('password',JSON.stringify(_this.user.password));
+                        window.open(defaultUrl,'_self')
+                        // response.set_cookie("user","123456");
+
+                      }else{
+                        alert(response.data.msg);
+                      }
+
+                    })
+                },
+                 register:function(){
+                 window.open(registertUrl,'_self')
+               }
+            }
+           
+        });
+        // sessionStorage.setItem("username","ddd")
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+</html>
