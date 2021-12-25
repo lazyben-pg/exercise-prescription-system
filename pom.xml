@@ -130,7 +130,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>7.4.0</version>
                 <configuration>
-                    <url>jdbc:mysql://192.168.1.134:3306/excercise_sys</url>
+                    <url>jdbc:mysql://150.158.46.31:3306/excercise_sys</url>
                     <user>root</user>
                     <password>123</password>
                 </configuration>
