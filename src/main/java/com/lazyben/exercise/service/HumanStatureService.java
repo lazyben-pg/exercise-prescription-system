@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -58,5 +59,13 @@ public class HumanStatureService {
 
     public List<HumanStature> getHumanStature(int userid) {
         return statureMapper.getStatureByUserId(userid);
+    }
+
+    public List<HumanStature> getHumanStatureById(int id) {
+        final HumanStature stature = statureMapper.getStatureById(id);
+        if(stature == null) return null;
+        List<HumanStature> result = new ArrayList<>();
+        result.add(stature);
+        return result;
     }
 }

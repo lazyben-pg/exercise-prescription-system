@@ -30,5 +30,7 @@ public interface StatureMapper {
                             @Param("basalMetabolicRate") double basalMetabolicRate,
                             @Param("stature") int stature);
 
+    @Select("SELECT * FROM userinfo where id=#{id}")
+    HumanStature getStatureById(int id);
 }
 
