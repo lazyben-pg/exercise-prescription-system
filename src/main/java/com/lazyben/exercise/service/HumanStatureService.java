@@ -35,7 +35,7 @@ public class HumanStatureService {
 
     public int getHumanStatureByPost(double[] data) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost("http://192.168.1.134:5000/cal/stature");
+        HttpPost httpPost = new HttpPost("http://192.168.1.134:8081/cal/stature");
         final HashMap<String, double[]> map = new HashMap<>();
         map.put("data", data);
         try {
