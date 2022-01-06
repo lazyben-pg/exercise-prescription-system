@@ -42,10 +42,7 @@
   </head>
 
   <body>
-  
   <!-- container section start -->
-<div id='check'>
-
   <section id="container" class="">
      
       
@@ -91,7 +88,8 @@
 
       <!--sidebar start-->
      
-            
+
+      
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -160,7 +158,7 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header" style="color: red;"><i class="fa fa-laptop"></i> 运动处方管理系统</h3>
+					<h3 class="page-header" style="color: red;"><i class="fa fa-laptop"></i> 乒乓球训练模式</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 						<li><i class="fa fa-laptop"></i>Dashboard</li>						  	
@@ -169,13 +167,61 @@
 			</div>
               
       <div class="row" style="padding-left:100px ;">
+				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
-       
-         <img src="./img/loginbg.png" style="width: 1100px;height: 400px;">       
-        
+					<div class="info-box blue-bg">
+            <a href="basic_table.html">
+             <img src="./img/q1.png" style="width:150px;height:100px" >
+						<div class="count"></div>
+						<div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正手攻球</div>			
+            </a>
+					 			
+					</div><!--/.info-box-->			
+				</div><!--/.col-->
+				
+				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
-
-
+					<div class="info-box brown-bg">
+					 <a href="basic_table.html">
+             <img src="./img/q2.png" style="width:150px;height:100px" >
+						<div class="count"></div>
+						<div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手快拨</div>			
+            </a>
+            
+            
+					</div><!--/.info-box-->			
+				</div><!--/.col-->	
+				
+				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+					<div class="info-box dark-bg">
+            <a href="basic_table.html">
+              <img src="./img/q3.png" style="width:150px;height:100px" >
+             <div class="count"></div>
+             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手搓球</div>			
+             </a>			
+					</div><!--/.info-box-->			
+				</div><!--/.col-->
+				
+				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+					<div class="info-box green-bg">
+            <a href="basic_table.html">
+              <img src="./img/q4.png" style="width:150px;height:100px" >
+             <div class="count"></div>
+             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前冲弧圈</div>			
+             </a>		
+					</div><!--/.info-box-->			
+				</div><!--/.col-->
+        <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+					<div class="info-box red-bg">
+            <a href="basic_table.html">
+              <img src="./img/q5.png" style="width:150px;height:100px" >
+             <div class="count"></div>
+             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加转弧圈</div>			
+             </a>
+					</div><!--/.info-box-->			
+				</div><!--/.col-->
+				
+                
 			</div><!--/.row-->
 
 
@@ -207,9 +253,6 @@
       </section>
       <!--main content end-->
   </section>
-
-</div>
-
   <!-- container section start -->
 
     <!-- javascripts -->
@@ -252,40 +295,6 @@
 	<script src="js/sparklines.js"></script>	
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="js/checklogin.js"></script>
-
-
-    <script type="text/javascript">
-     
-    var loginUrl="login.html"
-     var vm = new Vue({
-            el: '#check',
-            data: {
-            },
-            methods: {
-         
-            },
-            created: async function() {   //自动触发写入的函数
-              console.log('created!!!!!')
-              const islogin = await isLoginFn()
-              if(!islogin){
-                 window.open(loginUrl,'_self') 
-                 alert("请登录")
-              }
-              console.log(islogin)
-              console.log("2222222")
-
-            }
-        });
-        // sessionStorage.setItem("username","ddd")
-    </script>
-    
-
-
   <script>
 
       //knob
@@ -338,6 +347,7 @@
 
 
  
+
 
 
 

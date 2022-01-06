@@ -62,12 +62,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/checklogin.js"></script>
+
 
     <script type="text/javascript">
         var apiUrl = 'http://192.168.1.175:8080/auth/login';
         var defaultUrl='index.html';
         var registertUrl='register.html';
-        axios.defaults.withCredentials=true
+        // axios.defaults.withCredentials=true
 
 
         var vm = new Vue({
@@ -119,8 +121,14 @@
                  register:function(){
                  window.open(registertUrl,'_self')
                }
+            },
+            created: async function() {   //自动触发写入的函数
+              console.log('created!!!!!')
+              const islogin = await isLoginFn()
+              console.log(islogin)
+              console.log("2222222")
+
             }
-           
         });
         // sessionStorage.setItem("username","ddd")
     </script>

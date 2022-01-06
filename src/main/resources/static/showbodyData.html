@@ -80,8 +80,8 @@
       <!--header end-->
 
       <!--sidebar start-->
-     
-        
+    
+           
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -142,6 +142,7 @@
 
 
 
+       
       <!--sidebar end-->
 
       <!--main content start-->
@@ -163,7 +164,9 @@
                           <header class="panel-heading">
                             个人体质数据录入
                           </header>
-                          <div class="panel-body" id="userBodyData">
+
+                        <div  id="userBodyData">
+                          <div class="panel-body">
                           
                                   <div class="form-group">
                                       <label class="col-sm-2 control-label">性别</label>
@@ -171,14 +174,14 @@
                                           <!-- <input type="text" class="form-control"> -->
                                           <div class="radio" class="col-sm-4">
                                         
-                                                <input type="radio"  v-model='user.sexual' value="1" id="sex1">
+                                                <input type="radio"     :disabled="true"    v-model='user.sexual' value="1" id="sex1">
                                                 女
                                           
                                         </div>
                                         <div class="radio" class="col-sm-4">
                                            
-                                                <input type="radio" v-model='user.sexual' value="0" id="sex2">
-                                            男
+                                                <input type="radio"   :disabled="true"   v-model='user.sexual' value="0" id="sex2">
+                                               男
                                         
                                         </div>
                                       </div>
@@ -186,64 +189,59 @@
                                   <div class="form-group">
                                       <label class="col-sm-2 control-label">年龄</label>
                                       <div class="col-sm-10">
-                                          <input type="text" class="form-control" id="age"  value="26" v-model.number='user.age'>
+                                          <input type="text"    :disabled="true"      class="form-control" id="age"  v-model.number='user.age'>
                                           <!-- <span class="help-block">请输入自己的实际年龄</span> -->
                                       </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-sm-2 control-label">身高</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="height"  value="174"  v-model.number='user.height' type="text" >
+                                        <input class="form-control"   :disabled="true"       id="height"  v-model.number='user.height' type="text" >
                                     </div>
                                   </div>
                                   <div class="form-group">
                                       <label class="col-sm-2 control-label">体重</label>
                                       <div class="col-sm-10">
-                                          <input class="form-control" id="weight"  v-model.number='user.weight' type="text" >
+                                          <input class="form-control"   :disabled="true"      id="weight"  v-model.number='user.weight' type="text" >
                                       </div>
                                   </div>
                                   <div class="form-group">
                                     <label class="col-sm-2 control-label">肌肉重量</label>
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="muscleMass"  v-model.number='user.muscleMass' type="text">
+                                        <input class="form-control"    :disabled="true"    id="muscleMass"  v-model.number='user.muscleMass' type="text">
                                     </div>
                                 </div>
                                
                                 <div class="form-group">
                                       <label class="col-sm-2 control-label">脂肪重量</label>
                                       <div class="col-sm-10">
-                                          <input type="text"  id="fatWeight"  v-model.number='user.fatWeight' class="form-control" >
+                                          <input type="text"   :disabled="true"      id="fatWeight"  v-model.number='user.fatWeight' class="form-control" >
                                       </div>
                                 </div>
                                 
                                   <div class="form-group">
                                     <label class="col-sm-2 control-label">体脂率</label>
                                     <div class="col-sm-10">
-                                        <input type="text"  id="fatPercentage"  v-model.number='user.fatPercentage'  class="form-control" >
+                                        <input type="text"   :disabled="true"    id="fatPercentage"  v-model.number='user.fatPercentage'  class="form-control" >
                                     </div>
                                   </div> 
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">BIM</label>
                                         <div class="col-sm-10">
-                                            <input type="text"  id="bodyMassIndex"  v-model.number='user.bodyMassIndex'   class="form-control" >
+                                            <input type="text"     :disabled="true"  id="bodyMassIndex"  v-model.number='user.bodyMassIndex'   class="form-control" >
                                          </div>
                                     </div>     
 
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">基础代谢率</label>
                                         <div class="col-sm-10">
-                                        <input type="text"  id="basalMetabolicRate"  v-model.number='user.basalMetabolicRate'    class="form-control" >
-                                    </div>
-                                    </div>
-                                    <div class="form-group">
-                                       
-                                        <div class="col-sm-10" style="text-align:center">
-                                            <button type="submit" class="btn btn-primary vertical-center " v-on:click=send >提交数据</button>
-                                       </div>
+                                        <input type="text"   :disabled="true"  id="basalMetabolicRate"  v-model.number='user.basalMetabolicRate'    class="form-control" >
+                                        </div>
                                     </div>
                           </div>
-                          </div>
+                        </div> 
+               </div>
 
 <!-- Vue 显示 -->
 
@@ -252,41 +250,64 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var apiUrl='http://192.168.1.175:8080/humanstature'
+    var apiUrl='http://192.168.1.175:8080/humanstature?id='
     new Vue({
         el: "#userBodyData",
         data: {
             user: {
-                sexual: "0",
-                age: '24',
-                height: '174',
-                weight: '87.3',
-                muscleMass: '32.8',
-                fatWeight: '29.5',
-                fatPercentage: '33.8',
-                bodyMassIndex: '28.8',
-                basalMetabolicRate: '1619',
+                bid:'',
+                sexual: '', 
+                age: '',
+                height: '',
+                weight: '',
+                muscleMass: '',
+                fatWeight: '',
+                fatPercentage: '',
+                bodyMassIndex: '',
+                basalMetabolicRate: '',
             } 
         },
         methods: {
-            send: function() {
-                console.log(this.user);
-                // alert(JSON.stringify(this.user))s
-                console.log("11111")
-                axios({
-                    url: apiUrl,
-                    method : "post",
-                    //contentType : 'application/json',
-                    data : JSON.stringify(this.user),
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(response=>console.log(response));
+            GetQuestionareData: function () {
+                    console.log("开始");
+                    _this = this
+                    axios({
+                        url: apiUrl+this.bid,
+                        method: "get",
+                        headers: {
+                            "Content-Type": "application/json;charset=utf-8"
+                        }
+                    }).then(function(response){
+                        console.log("获取体质数据")
+                     console.log(response.data.data[0])
+                      if(response.data.status=='OK'){
+                        _this.user.sexual=response.data.data[0].sexual
+                        _this.user.age=response.data.data[0].age
+                        _this.user.height=response.data.data[0].height
+                        _this.user.weight=response.data.data[0].weight
+                        _this.user.muscleMass=response.data.data[0].muscleMass
+                        _this.user.fatWeight=response.data.data[0].fatWeight
+                        _this.user.fatPercentage=response.data.data[0].fatPercentage
+                        _this.user.bodyMassIndex=response.data.data[0].bodyMassIndex
+                        _this.user.basalMetabolicRate=response.data.data[0].basalMetabolicRate
 
-
+                      }else{
+                        console.log(response.data.msg);
+                      }
+                    })
+                },
+            getId:function(){
+                    var test = window.location.href
+                    this.bid = test.split("?id=")[1]
+                    console.log("获取参数")
+                    console.log(this.bid)
+            }
+        },
+        created() {   //自动触发写入的函数
+                this.getId();
+                this.GetQuestionareData();
                 
             }
-        }
     })
 </script>
                       </section>
