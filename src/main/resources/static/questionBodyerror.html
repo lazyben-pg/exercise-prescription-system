@@ -50,14 +50,9 @@
         display: block;
         margin-left: auto;
         margin- right: auto;*/
-      }
-      .date{
-        float:right; 
-        width:200px;
-        border:1px solid #00F;
+
       }
    </style>
-
 
   </head>
 
@@ -109,8 +104,7 @@
 
       <!--sidebar start-->
       
-       
-              
+
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -121,30 +115,30 @@
                         <span  style="font-size:14px">运动处方管理系统</span>
                     </a>
                 </li>
-                <li>
-                    <a class="" href="questionBody.html">
-                        <i class="icon_genius"></i> 
-                        <span style="font-size:14px">个人健康状况调查</span>
+                         <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_document_alt"></i>
+                        <span style="font-size:13px">个人身体状况调查</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
-                </li>
+                    <ul class="sub">
+                        <li><a class="" href="questionBody.html"> <span style="font-size:14px">个人健康状况调查   </span></a></li>                          
+                        <li><a class="" href="questionBody.html"> <span style="font-size:14px">中医体质调查    </span></a></li>
+                    </ul>
+                </li>       
+           
                 <li>
                     <a class="" href="bodyDataAdd.html">
                         <i class="icon_genius"></i> 
                         <span style="font-size:14px">个人体质数据录入</span>
                     </a>
                 </li>
-               <li class="sub-menu">
-                <a href="javascript:;" class="">
-                    <i class="icon_piechart"></i>
-                    <span style="font-size:13px" >运动健康管理</span>   
-                    <span class="menu-arrow arrow_carrot-right"></span>
-                </a>
-                <ul class="sub">
-                    <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
-                    <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
-                    <li><a class="" href="questionBody.html"> <span style="font-size:14px">查看运动处方报告  </span></a></li>
-                </ul>
-            </li>  
+                <li>                     
+                  <a class="" href="bodyDataManage.html">
+                      <i class="icon_piechart"></i>
+                      <span style="font-size:13px" >运动健康管理</span>                     
+                  </a>                                    
+               </li>
                            
                <li class="sub-menu">
                 <a href="javascript:;" class="">
@@ -154,7 +148,7 @@
                 </a>
                 <ul class="sub">
                     <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
-                    <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
+                    <li><a class="" href="#"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                 </ul>
               </li>  
               
@@ -164,13 +158,25 @@
                     <span style="font-size:14px">个人反馈问卷</span>
                 </a>
             </li>
+                
+                <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_documents_alt"></i>
+                        <span>Pages</span>
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">                          
+                        <li><a class="" href="profile.html">Profile</a></li>
+                        <li><a class="" href="login.html"><span>Login Page</span></a></li>
+                        <li><a class="" href="blank.html">Blank Page</a></li>
+                        <li><a class="" href="404.html">404 Error</a></li>
+                    </ul>
+                </li>
+                
             </ul>
             <!-- sidebar menu end-->
         </div>
-      </aside>
-
-    
-
+    </aside>
 
       <!--sidebar end-->
 
@@ -192,7 +198,7 @@
                     <div class="col-lg-12">
                         <section class="panel">
                             <header class="panel-heading">
-                            您的个人体质健康筛查问卷情况
+                            请认真填写个人体质健康筛查问卷
                             </header>
                             <div class="panel-body">
                                 <div class="form">
@@ -203,11 +209,10 @@
 
                                                     <div class="test_content">
                                                         <div class="test_content_title">
-                                                            <h2><font  color="#FF0000">您的个人体质健康筛查问卷详情</font></h2>
+                                                            <h2>个人体质健康筛查问卷</h2>
                                                             <p>
                                                                 <span>共</span><i class="content_lit">14</i><span>题
                                                             </p>
-                                                            <p> <span>该问卷填写时间是&nbsp;&nbsp; {{createdAt}}</span></p>
                                                         </div>
                                                     </div>
                                                     <div class="test_content_nr">
@@ -223,8 +228,8 @@
                                                                             
                                                                                 <li class="option">
                                                                                     
-                                                                                        <input  v-model="answer.q1" type="radio" value="A"  class="radioOrCheck" 
-                                                                                        name="answer1"  disabled="disabled"
+                                                                                        <input  v-model="answer.q1" type="radio" value="A"  class="radioOrCheck" name="answer1"
+                                                                                     
                                                                                         />
                                                                                     
                                                                                     
@@ -237,7 +242,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input  v-model="answer.q1" type="radio" value="B"  class="radioOrCheck" name="answer1"
-                                                                                            id="0_answer_1_option_2"  disabled="disabled"
+                                                                                            id="0_answer_1_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -262,7 +267,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q2" type="radio" value="A" class="radioOrCheck" name="answer2"
-                                                                                            id="0_answer_2_option_1"  disabled="disabled"
+                                                                                            id="0_answer_2_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -275,7 +280,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q2" type="radio" value="B" class="radioOrCheck" name="answer2"
-                                                                                            id="0_answer_2_option_2"  disabled="disabled"
+                                                                                            id="0_answer_2_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -288,7 +293,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q2" type="radio" value="C" class="radioOrCheck" name="answer2"
-                                                                                            id="0_answer_2_option_3"  disabled="disabled"
+                                                                                            id="0_answer_2_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -315,7 +320,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q3" type="radio" value="A" class="radioOrCheck" name="answer3"
-                                                                                            id="0_answer_3_option_1"  disabled="disabled"
+                                                                                            id="0_answer_3_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -328,7 +333,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q3" type="radio" value="B" class="radioOrCheck" name="answer3"
-                                                                                            id="0_answer_3_option_2"  disabled="disabled"
+                                                                                            id="0_answer_3_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -341,7 +346,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q3" type="radio" value="C" class="radioOrCheck" name="answer3"
-                                                                                            id="0_answer_3_option_3"  disabled="disabled"
+                                                                                            id="0_answer_3_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -366,7 +371,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q4" type="radio" value="A" class="radioOrCheck" name="answer4"
-                                                                                            id="0_answer_4_option_1"  disabled="disabled"
+                                                                                            id="0_answer_4_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -379,7 +384,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q4" type="radio" value="B" class="radioOrCheck" name="answer4"
-                                                                                            id="0_answer_4_option_2"  disabled="disabled"
+                                                                                            id="0_answer_4_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -405,7 +410,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q5" type="radio" value="A" class="radioOrCheck" name="answer5"
-                                                                                            id="0_answer_5_option_1"  disabled="disabled"
+                                                                                            id="0_answer_5_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -418,7 +423,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q5" type="radio" value="B" class="radioOrCheck" name="answer5"
-                                                                                            id="0_answer_5_option_2"  disabled="disabled"
+                                                                                            id="0_answer_5_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -443,7 +448,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q6" type="radio" value="A" class="radioOrCheck" name="answer6"
-                                                                                            id="0_answer_6_option_1"  disabled="disabled"
+                                                                                            id="0_answer_6_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -456,7 +461,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q6" type="radio" value="B" class="radioOrCheck" name="answer6"
-                                                                                            id="0_answer_6_option_2"  disabled="disabled"
+                                                                                            id="0_answer_6_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -468,7 +473,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                     <input v-model="answer.q6" type="radio" value="C" class="radioOrCheck" name="answer6"
-                                                                                        id="0_answer_6_option_2"  disabled="disabled"
+                                                                                        id="0_answer_6_option_2"
                                                                                     />
                                                                                 
                                                                                 
@@ -493,7 +498,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q7" type="radio" value="A" class="radioOrCheck" name="answer7"
-                                                                                            id="0_answer_7_option_1"  disabled="disabled"
+                                                                                            id="0_answer_7_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -506,7 +511,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q7" type="radio" value="B" class="radioOrCheck" name="answer7"
-                                                                                            id="0_answer_7_option_2"  disabled="disabled"
+                                                                                            id="0_answer_7_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -519,7 +524,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q7" type="radio" value="C" class="radioOrCheck" name="answer7"
-                                                                                            id="0_answer_7_option_3" disabled="disabled"
+                                                                                            id="0_answer_7_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -543,7 +548,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q8" type="radio" value="A" class="radioOrCheck" name="answer8"
-                                                                                            id="0_answer_8_option_1" disabled="disabled"
+                                                                                            id="0_answer_8_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -556,7 +561,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q8" type="radio" value="B" class="radioOrCheck" name="answer8"
-                                                                                            id="0_answer_8_option_2"  disabled="disabled"
+                                                                                            id="0_answer_8_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -580,7 +585,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q9" type="radio" value="A" class="radioOrCheck" name="answer9"
-                                                                                            id="0_answer_9_option_1"  disabled="disabled"
+                                                                                            id="0_answer_9_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -593,7 +598,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q9" type="radio" value="B" class="radioOrCheck" name="answer9"
-                                                                                            id="0_answer_9_option_2"   disabled="disabled"
+                                                                                            id="0_answer_9_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -606,7 +611,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q9" type="radio" value="C" class="radioOrCheck" name="answer9"
-                                                                                            id="0_answer_9_option_3"  disabled="disabled"
+                                                                                            id="0_answer_9_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -619,8 +624,8 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q9" type="radio" value="D"  class="radioOrCheck" name="answer9"
-                                                                                            id="0_answer_9_option_4"  disabled="disabled"
-                                                                                        /> 
+                                                                                            id="0_answer_9_option_4"
+                                                                                        />
                                                                                     
                                                                                     
                                                                                     <label for="0_answer_9_option_4">
@@ -644,7 +649,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q10" type="radio" value="A" class="radioOrCheck" name="answer10"
-                                                                                            id="0_answer_10_option_1"  disabled="disabled"
+                                                                                            id="0_answer_10_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -657,7 +662,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q10" type="radio" value="B" class="radioOrCheck" name="answer10"
-                                                                                            id="0_answer_10_option_2"   disabled="disabled"
+                                                                                            id="0_answer_10_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -683,7 +688,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q11" type="radio" value="A" class="radioOrCheck" name="answer11"
-                                                                                            id="0_answer_11_option_1"   disabled="disabled"
+                                                                                            id="0_answer_11_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -696,7 +701,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q11" type="radio" value="B" class="radioOrCheck" name="answer11"
-                                                                                            id="0_answer_11_option_2"   disabled="disabled"
+                                                                                            id="0_answer_11_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -709,7 +714,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q11" type="radio" value="C" class="radioOrCheck" name="answer11"
-                                                                                            id="0_answer_11_option_3"  disabled="disabled"
+                                                                                            id="0_answer_11_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -734,7 +739,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q12" type="radio" value="A" class="radioOrCheck" name="answer12"
-                                                                                            id="0_answer_12_option_1"   disabled="disabled"
+                                                                                            id="0_answer_12_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -747,7 +752,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q12" type="radio" value="B" class="radioOrCheck" name="answer12"
-                                                                                            id="0_answer_12_option_2"  disabled="disabled"
+                                                                                            id="0_answer_12_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -772,7 +777,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q13" type="radio" value="A" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_1"   disabled="disabled"
+                                                                                            id="0_answer_13_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -785,7 +790,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q13" type="radio" value="B" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_2"   disabled="disabled"
+                                                                                            id="0_answer_13_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -798,7 +803,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q13" type="radio" value="C" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_3"  disabled="disabled"
+                                                                                            id="0_answer_13_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -811,7 +816,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q13" type="radio" value="D" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_4"  disabled="disabled"
+                                                                                            id="0_answer_13_option_4"
                                                                                         />
                                                                                     
                                                                                     
@@ -836,7 +841,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q14" type="radio" value="A" class="radioOrCheck" name="answer14"
-                                                                                            id="0_answer_14_option_1"  disabled="disabled"
+                                                                                            id="0_answer_14_option_1"
                                                                                         />
                                                                                     
                                                                                     
@@ -849,7 +854,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q14" type="radio" value="B" class="radioOrCheck" name="answer14"
-                                                                                            id="0_answer_14_option_2" disabled="disabled"
+                                                                                            id="0_answer_14_option_2"
                                                                                         />
                                                                                     
                                                                                     
@@ -862,7 +867,7 @@
                                                                                 <li class="option">
                                                                                     
                                                                                         <input v-model="answer.q14" type="radio" value="C" class="radioOrCheck" name="answer14"
-                                                                                            id="0_answer_14_option_3"  disabled="disabled"
+                                                                                            id="0_answer_14_option_3"
                                                                                         />
                                                                                     
                                                                                     
@@ -882,13 +887,13 @@
                                                         </ul>
                                                     </div>
                                                 <!-- 提交 -->
-                                                    <!-- <div class="test_content">
+                                                    <div class="test_content">
                                                         <div class="test_content_title">
                                                             <div class="test_title">
                                                                 <font><input type="button"   v-on:click="send"  value="提交"></font>
                                                             </div>
                                                         </div>
-                                                    </div>           -->
+                                                    </div>          
                                                 </div>
 
                                             </div>
@@ -928,16 +933,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script type="text/javascript">
-
-        //var qid=this.$route.query.id
-        var apiUrl = 'http://192.168.1.175:8080/questionnaire?id=';
+        var apiUrl = 'http://192.168.1.175:8080/questionnaire';
         axios.defaults.withCredentials=true
-
         var vm = new Vue({
             el: '#nr_left',
             data: {
-                createdAt:'',
-                id:'',
                 answer: {
                     q1:'',
                     q2:'',
@@ -956,51 +956,30 @@
                 }
             },
             methods: {
-                GetQuestionareData: function () {
-                    console.log("开始");
+                send: function () {
+                    console.log("11111");
+                    alert("提交")
                     _this = this
+                    console.log(_this.answer)
                     axios({
-                        url: apiUrl+this.id,
-                        method: "get",
+                        url: apiUrl,
+                        method: "post",
+                        data : JSON.stringify(_this.answer),
                         headers: {
                             "Content-Type": "application/json;charset=utf-8"
                         }
                     }).then(function(response){
-                    // console.log(response.data.data[0])
-                      if(response.data.status=='OK'){
-                        _this.answer.q1=response.data.data[0].q1
-                        _this.answer.q2=response.data.data[0].q2
-                        _this.answer.q3=response.data.data[0].q3
-                        _this.answer.q4=response.data.data[0].q4
-                        _this.answer.q5=response.data.data[0].q5
-                        _this.answer.q6=response.data.data[0].q6
-                        _this.answer.q7=response.data.data[0].q7
-                        _this.answer.q8=response.data.data[0].q8
-                        _this.answer.q9=response.data.data[0].q9
-                        _this.answer.q10=response.data.data[0].q10
-                        _this.answer.q11=response.data.data[0].q11
-                        _this.answer.q12=response.data.data[0].q12
-                        _this.answer.q13=response.data.data[0].q13
-                        _this.answer.q14=response.data.data[0].q14
-
-                        _this.createdAt=response.data.data[0].createdAt
-                        
+                        console.log(response)
+                      if(response.data.status=='ok'){
+                      
+                        console.log(response.msg)
                       }else{
                         console.log(response.data.msg);
                       }
+
                     })
-                },
-                getId:function(){
-                    var test = window.location.href
-                    this.id = test.split("?id=")[1]
-                    console.log("获取参数")
-                    console.log(this.id)
                 }
-            },
-            created() {   //自动触发写入的函数
-                this.getId();
-                this.GetQuestionareData();
-                
+             
             }
            
         });

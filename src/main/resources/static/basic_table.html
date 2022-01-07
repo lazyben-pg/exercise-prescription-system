@@ -86,6 +86,7 @@
         <!--sidebar start-->
 
 
+           
         <aside>
             <div id="sidebar"  class="nav-collapse "  font-size= 5px>
                 <!-- sidebar menu start-->
@@ -96,30 +97,30 @@
                             <span  style="font-size:14px">运动处方管理系统</span>
                         </a>
                     </li>
-                             <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon_document_alt"></i>
-                            <span style="font-size:13px">个人身体状况调查</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
+                    <li>
+                        <a class="" href="questionBody.html">
+                            <i class="icon_genius"></i> 
+                            <span style="font-size:14px">个人健康状况调查</span>
                         </a>
-                        <ul class="sub">
-                            <li><a class="" href="questionBody.html"> <span style="font-size:14px">个人健康状况调查   </span></a></li>                          
-                            <li><a class="" href="questionBody.html"> <span style="font-size:14px">中医体质调查    </span></a></li>
-                        </ul>
-                    </li>       
-               
+                    </li>
                     <li>
                         <a class="" href="bodyDataAdd.html">
                             <i class="icon_genius"></i> 
                             <span style="font-size:14px">个人体质数据录入</span>
                         </a>
                     </li>
-                    <li>                     
-                      <a class="" href="bodyDataManage.html">
-                          <i class="icon_piechart"></i>
-                          <span style="font-size:13px" >运动健康管理</span>                     
-                      </a>                                    
-                   </li>
+                   <li class="sub-menu">
+                    <a href="javascript:;" class="">
+                        <i class="icon_piechart"></i>
+                        <span style="font-size:13px" >运动健康管理</span>   
+                        <span class="menu-arrow arrow_carrot-right"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
+                        <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
+                        <li><a class="" href="questionBody.html"> <span style="font-size:14px">查看运动处方报告  </span></a></li>
+                    </ul>
+                </li>  
                                
                    <li class="sub-menu">
                     <a href="javascript:;" class="">
@@ -129,7 +130,7 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
-                        <li><a class="" href="#"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
+                        <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                     </ul>
                   </li>  
                   
@@ -139,28 +140,12 @@
                         <span style="font-size:14px">个人反馈问卷</span>
                     </a>
                 </li>
-                    
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon_documents_alt"></i>
-                            <span>Pages</span>
-                            <span class="menu-arrow arrow_carrot-right"></span>
-                        </a>
-                        <ul class="sub">                          
-                            <li><a class="" href="profile.html">Profile</a></li>
-                            <li><a class="" href="login.html"><span>Login Page</span></a></li>
-                            <li><a class="" href="blank.html">Blank Page</a></li>
-                            <li><a class="" href="404.html">404 Error</a></li>
-                        </ul>
-                    </li>
-                    
                 </ul>
                 <!-- sidebar menu end-->
             </div>
-        </aside>
-
-
-
+          </aside>
+    
+    
 
         <!--main content start-->
         <section id="main-content">
@@ -313,14 +298,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/checklogin.js"></script>
 
+    <script>
+           console.log("测试登录")
+
+             var checkusername=JSON.parse(sessionStorage.getItem("username")); 
+                if(checkusername==null){
+                 window.open(loginUrl,'_self') 
+                 alert("未登录")
+                }
+       
+    </script>
 
     <script type="text/javascript">
         axios.defaults.withCredentials = true
-
         var apiUrl = 'http://192.168.1.175:8080/prescription';
         var apiLogin='http://192.168.1.175:8080/auth/login';
-  
+             
+        var loginUrl="login.html"
 
         var vm = new Vue({
             el: '#prescription',
@@ -339,7 +335,9 @@
             methods: {
                 GetHostData: function () {
                     console.log(document.cookie)
+
                    this.username=JSON.parse(sessionStorage.getItem("username")); 
+                   console.log(this.username)
                     axios({
                         url: apiUrl,
                         data : JSON.stringify(this.user),
@@ -373,30 +371,21 @@
 
                     });
                 },
-                logincheck:function(){
-                    // alert("登录成功");
-                    _this = this
-                     this.user.username= JSON.parse(sessionStorage.getItem("username")); 
-                     this.user.password=JSON.parse(sessionStorage.getItem("password")); 
-                    axios({
-                        url: apiLogin,
-                        method: "post",
-                        data : JSON.stringify(this.user),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    }).then(function(response){
-                        console.log(response.data.status)
-                        if(response.data.status == "ok") {
-                            _this.GetHostData();
-                        }
-                        
-                    })
-                }
             },
-            created() {   //自动触发写入的函数
-                // this.logincheck();
+            created() { 
+            //    var checkusername=JSON.parse(sessionStorage.getItem("username")); 
+            //     if(checkusername==null){
+            //      window.open(loginUrl,'_self') 
+            //     }
+       
                 this.GetHostData();
+            //     const islogin = await isLoginFn()
+            //     console.log(islogin)
+            //   if(!islogin){
+            //      window.open(loginUrl,'_self') 
+            //      alert("请登录")
+            //   }
+         
 
             }
         });
