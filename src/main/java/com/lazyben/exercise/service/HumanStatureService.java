@@ -2,9 +2,11 @@ package com.lazyben.exercise.service;
 
 import com.alibaba.fastjson.JSON;
 import com.lazyben.exercise.entity.HumanStature;
+import com.lazyben.exercise.entity.Questionnaire;
+import com.lazyben.exercise.mapper.PrescriptionPairMapper;
+import com.lazyben.exercise.mapper.QuestionnaireMapper;
 import com.lazyben.exercise.mapper.StatureMapper;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -14,23 +16,22 @@ import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 @Component
 public class HumanStatureService {
     private final StatureMapper statureMapper;
+    private final PrescriptionPairMapper prescriptionPairMapper;
+    private final QuestionnaireMapper questionnaireMapper;
 
     @Autowired
-    public HumanStatureService(StatureMapper statureMapper) {
+    public HumanStatureService(StatureMapper statureMapper, PrescriptionPairMapper prescriptionPairMapper, QuestionnaireMapper questionnaireMapper) {
         this.statureMapper = statureMapper;
+        this.prescriptionPairMapper = prescriptionPairMapper;
+        this.questionnaireMapper = questionnaireMapper;
     }
 
     public int getHumanStatureByPost(double[] data) throws IOException {
@@ -43,7 +44,7 @@ public class HumanStatureService {
             httpPost.setEntity(entity);
             CloseableHttpResponse response = client.execute(httpPost);
             final HttpEntity entity1 = response.getEntity();
-            return  Integer.parseInt(EntityUtils.toString(entity1));
+            return Integer.parseInt(EntityUtils.toString(entity1));
         } catch (IOException e) {
             throw new IOException(e);
         }
@@ -63,7 +64,7 @@ public class HumanStatureService {
 //            String line = in.readLine();
 //            process.waitFor();
 //            final int stature = Integer.parseInt(line);
-            final  int stature = getHumanStatureByPost(data);
+            final int stature = getHumanStatureByPost(data);
             humanStature.setStature(stature);
             statureMapper.createHumanStature(humanStature.getUserid(),
                     humanStature.getSexual(),
@@ -79,7 +80,12 @@ public class HumanStatureService {
                     humanStature.getStandardWeight(),
                     humanStature.getBasalMetabolicRate(),
                     humanStature.getStature());
-            return statureMapper.getStatureByUserId(humanStature.getUserid());
+            final List<HumanStature> result = statureMapper.getStatureByUserId(humanStature.getUserid());
+            final List<Questionnaire> questionnaires = questionnaireMapper.getQuestionnaire(humanStature.getUserid());
+            if (!questionnaires.isEmpty()) {
+                prescriptionPairMapper.createPrescriptionPair(humanStature.getUserid(), questionnaires.get(questionnaires.size() - 1).getId(), result.get(result.size() - 1).getId());
+            }
+            return result;
         } catch (IOException e) {
             throw new RuntimeException("人体体质模型调用失败");
         }
@@ -91,7 +97,7 @@ public class HumanStatureService {
 
     public List<HumanStature> getHumanStatureById(int id) {
         final HumanStature stature = statureMapper.getStatureById(id);
-        if(stature == null) return null;
+        if (stature == null) return null;
         List<HumanStature> result = new ArrayList<>();
         result.add(stature);
         return result;

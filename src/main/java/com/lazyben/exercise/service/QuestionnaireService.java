@@ -1,7 +1,10 @@
 package com.lazyben.exercise.service;
 
+import com.lazyben.exercise.entity.HumanStature;
 import com.lazyben.exercise.entity.Questionnaire;
+import com.lazyben.exercise.mapper.PrescriptionPairMapper;
 import com.lazyben.exercise.mapper.QuestionnaireMapper;
+import com.lazyben.exercise.mapper.StatureMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +14,28 @@ import java.util.List;
 @Service
 public class QuestionnaireService {
     private final QuestionnaireMapper questionnaireMapper;
+    private final PrescriptionPairMapper prescriptionPairMapper;
+    private final StatureMapper statureMapper;
 
     @Autowired
-    public QuestionnaireService(QuestionnaireMapper questionnaireMapper) {
+    public QuestionnaireService(QuestionnaireMapper questionnaireMapper, PrescriptionPairMapper prescriptionPairMapper, StatureMapper statureMapper) {
         this.questionnaireMapper = questionnaireMapper;
+        this.prescriptionPairMapper = prescriptionPairMapper;
+        this.statureMapper = statureMapper;
     }
 
     public void createQuestionnaire(int userid, String[] result) {
         questionnaireMapper.createQuestionnaire(userid, result[0], result[1], result[2], result[3], result[4], result[5],
                 result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], analyseSymptom(result));
+        final List<HumanStature> statures = statureMapper.getStatureByUserId(userid);
+        if (!statures.isEmpty()) {
+            final List<Questionnaire> questionnaires = questionnaireMapper.getQuestionnaire(userid);
+            prescriptionPairMapper.createPrescriptionPair(userid,
+                    questionnaires.get(questionnaires.size() - 1).getId(),
+                    statures.get(statures.size() - 1).getId());
+        }
+
+
     }
 
     public List<Questionnaire> getQuestionnaire(int userid) {

@@ -5,6 +5,15 @@ CREATE TABLE user
     encrypted_password varchar(100)
 );
 
+CREATE TABLE prescription
+(
+    id bigint primary key auto_increment,
+    userid bigint,
+    questionnaire_id bigint,
+    userinfo_id bigint,
+    created_at datetime
+);
+
 CREATE TABLE userinfo
 (
     id bigint primary key auto_increment,
