@@ -69,4 +69,21 @@ public class PrescriptionService {
                 return nodeSearchService.getPrescription(symptom, Constant.DEFAULT_NODE_TYPE);
         }
     }
+
+    public List<SearchResult> getPrescriptionByPair(int id, int questionnaireId, int userInfoId) {
+        final List<HumanStature> humanStatures = humanStatureService.getHumanStatureById(userInfoId);
+        final List<Questionnaire> questionnaires = questionnaireService.getQuestionnaireById(questionnaireId);
+        if (humanStatures.isEmpty() || questionnaires.isEmpty()) return null;
+        final HumanStature humanStature = humanStatures.get(0);
+        final Questionnaire questionnaire = questionnaires.get(0);
+        if (humanStature.getUserid() != id || questionnaire.getUserid() != id) return null;
+        String symptom = Constant.SYMPTOM[questionnaires.get(0).getSymptom()];
+        if ("无病症".equals(symptom)) {
+            // 填写了问卷，但无任何病症，根据人体体质给运动处方
+            return getPrescriptionHumanStature(humanStature);
+        } else {
+            // 有相应的病症，根据问卷给运动处方
+            return getPrescriptionFromQuestionnaireSymptom(symptom);
+        }
+    }
 }
