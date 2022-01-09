@@ -38,7 +38,9 @@
 				<div class="login-center-input">
 					<input type="password"  placeholder="确认密码"     v-model.number='user.repassword'     onfocus="this.placeholder=''" onblur="this.placeholder='确认密码'"/>
 					<div class="login-center-input-text">密码</div>
-					<span style="color: red;"><p>两次密码不一致</p></span>
+                    <template  v-if='isShow' >
+					<!-- <span style="color: red;"><p>两次密码不一致</p></span> -->
+				</template>
 				</div>
 			</div>
 			<div class="login-button"  v-on:click="register">
@@ -69,7 +71,8 @@
 				username:'',
 				password:'',
 			 },
-			 repassword:''
+			 repassword:'',
+			 isShow:'true'
 
 		 },
 		 methods: {
@@ -99,6 +102,10 @@
 						})
 
 				}else{
+					// if(this.user.password!=null & this.user.repassword!=null){
+					// 	 this.isShow=false
+					// }
+                   
 					alert("密码不一致")
 				}
 				

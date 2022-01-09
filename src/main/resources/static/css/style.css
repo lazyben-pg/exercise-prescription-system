@@ -74,6 +74,7 @@ table tr th { color: #688a7e;}
 }
 .login-img-body{
   background: url('../img/loginbg.png') no-repeat center center fixed; 
+  background-size: 200px 200px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -87,7 +88,8 @@ table tr th { color: #688a7e;}
   background-size: cover;
 }
 .login-img3-body{
-  background: url('../img/loginbg.png') no-repeat center center fixed; 
+  background: url('../img/bg-1.jpg') no-repeat center center fixed; 
+  /* background-size: 200px 200px; */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

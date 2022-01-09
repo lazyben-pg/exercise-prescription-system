@@ -78,8 +78,8 @@
 
             <!--sidebar start-->
 
-            
-            
+
+              
             <aside>
                 <div id="sidebar"  class="nav-collapse "  font-size= 5px>
                     <!-- sidebar menu start-->
@@ -140,6 +140,7 @@
         
         
 
+
             <!--main content start-->
             <section id="main-content">
                 <section class="wrapper">
@@ -155,7 +156,7 @@
                 </div>
                 <!-- page start-->
             
-               <div  id="BodyDataTable">
+               <div  id="QuestionnareTable">
                     <div class="row">
                         <div class="col-lg-12">
                             <section class="panel">
@@ -168,7 +169,7 @@
                                     <tr>
                                         <th>序号</th>
                                         <th>日期</th>
-                                        <th>个人体质数据</th>
+                                        <th>个人问卷调查</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -177,7 +178,7 @@
                                         <td>{{item.createdAt}}</td> 
                                         <td>
                                             <!-- <a href="./showBodyQuestionnare.html?id='{{item.qid}}'">点击查看</a> -->
-                                            <a :href="getGoodsHref(item.bid)">点击查看</a>
+                                            <a :href="getGoodsHref(item.questionnaireId,item.userinfoId)">点击查看</a>
                                             <!-- <router-link :to="{name:'Index', params: { userId: 123 }}">link</router-link> -->
                                         </td>              
                                     </tr>                                               
@@ -216,18 +217,17 @@
 
     <script type="text/javascript">
        axios.defaults.withCredentials = true
-        var apiUrl = 'http://192.168.1.175:8080/humanstatures'
+        var apiUrl = 'http://192.168.1.175:8080/pair'
          
         function formatDate(now) { 
             return Date(parseInt(now) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
         }  
         
-        
-
         var loginUrl="login.html"
         var logoutUrl="http://192.168.1.175:8080/auth/logout"
         var checkIsLoginUrl="http://192.168.1.175:8080/auth"
-    
+   
+
 
         var vm = new Vue({
             el: '#showdata',
@@ -251,24 +251,27 @@
                         xhrFields: {withCredentials: true}
                     }).then(function(response){
 						//console.log(response.data.data)
-                        var BodyData=response.data.data
+                        var QuestionData=response.data.data
                         _this.info = []
-                        console.log(" 获取身体数据")
-                        console.log(BodyData)
-                        for(var i=0;i<BodyData.length;i++){
+
+                        for(var i=0;i<QuestionData.length;i++){
+                      
+                            //  console.log(Date(parseInt(QuestionData[i]['createdAt']) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ')) 
                             _this.info[i] = {
-                                bid : BodyData[i]['id'],
-                                createdAt:BodyData[i]['createdAt']
+                                questionnaireId : QuestionData[i]['questionnaireId'],
+                                createdAt:QuestionData[i]['createdAt'],
+                                userinfoId:QuestionData[i]['userinfoId']
+
                             }
                         }
-                        console.log('打印重组信息')
-                        console.log(_this.info)
+                        // console.log('打印重组信息')
+                        // console.log(_this.info)
 
 					})
 
                 },
-                getGoodsHref:function(val){
-	                 return './showbodyData.html?id='+val
+                getGoodsHref:function(questionnaireId,userinfoId){
+	                 return './showHistoryPrescription.html?userinfoId='+userinfoId+"&"+"questionnaireId="+questionnaireId
             	},
                 logout:function(){
                     axios({
@@ -299,15 +302,12 @@
                             }
                        })          
                 }
-
-
-     
             },
             created() {   //自动触发写入的函数
                 this.username=JSON.parse(sessionStorage.getItem("username")); 
                 this.checkIsLogin()
                 console.log('created!!!!!')
-                this.GetHostData()
+                this.GetHostData();
             }
         });
     </script>

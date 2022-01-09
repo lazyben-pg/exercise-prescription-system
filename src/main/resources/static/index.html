@@ -66,20 +66,15 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">张三</span>
+                            <span class="username">{{username}}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li>
-                                <a href="login.html"><i class="icon_key_alt"></i> 退出</a>
+                                <a v-on:click="logout"><i class="icon_key_alt"></i> 退出</a>
                             </li>
-                            <li>
-                                <a href="documentation.html"><i class="icon_key_alt"></i> 修改密码</a>
-                            </li>
-                            <li>
-                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
-                            </li>
+
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -123,7 +118,7 @@
                 <ul class="sub">
                     <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
                     <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
-                    <li><a class="" href="questionBody.html"> <span style="font-size:14px">查看运动处方报告  </span></a></li>
+                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">查看个人运动处方记录  </span></a></li>
                 </ul>
             </li>  
                            
@@ -171,37 +166,12 @@
       <div class="row" style="padding-left:100px ;">
 
        
-         <img src="./img/loginbg.png" style="width: 1100px;height: 400px;">       
+         <!-- <img src="./img/loginbg.png" style="width: 1100px;height: 400px;">        -->
         
-
-
+        <h1> 欢迎来到运动处方系统</h1>
+        <h2>首先填写个人问卷----->然后输入体脂称的参数-----> 最后就可以得到个性化的运动处方</h2>
 
 			</div><!--/.row-->
-
-
-
-  
-            
-		  
-		  <!-- Today status end -->
-			
-             
-      
-
-				
-	
-                    
-                   
-       <!-- statics end -->
-              
-            
-				
-
-              <!-- project team & activity start -->
-          
-		
-	
-              <!-- project team & activity end -->
 
           </section>
       </section>
@@ -228,7 +198,7 @@
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>
@@ -262,88 +232,59 @@
     <script type="text/javascript">
      
     var loginUrl="login.html"
+    var logoutUrl="http://192.168.1.175:8080/auth/logout"
+    var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+
+    
      var vm = new Vue({
             el: '#check',
             data: {
+                isLogin:'',
+                username:''
             },
             methods: {
+
+
+                logout:function(){
+                    axios({
+                        url: logoutUrl,
+                        method: "get",
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                    }).then(function(response){
+                        if(response.data.status=='OK'){ 
+                            window.open(loginUrl,'_self')
+                            alert(response.data.msg)
+                           
+                        }
+
+                    })
+                },
+                checkIsLogin:function(){
+                    axios({
+                        url:checkIsLoginUrl,
+                        method:'get',
+                        headers: {
+                            "Content-Type": "application/json"
+                        }
+                        }).then(function(response){
+                            if(!response.data.isLogin){
+                                window.open(loginUrl,'_self')
+                            }
+                       })          
+                }
+
+
          
             },
-            created: async function() {   //自动触发写入的函数
-              console.log('created!!!!!')
-              const islogin = await isLoginFn()
-              if(!islogin){
-                 window.open(loginUrl,'_self') 
-                 alert("请登录")
-              }
-              console.log(islogin)
-              console.log("2222222")
-
+            created() {   //自动触发写入的函数
+            this.username=JSON.parse(sessionStorage.getItem("username")); 
+            this.checkIsLogin()
             }
         });
-        // sessionStorage.setItem("username","ddd")
+     
     </script>
     
-
-
-  <script>
-
-      //knob
-      $(function() {
-        $(".knob").knob({
-          'draw' : function () { 
-            $(this.i).val(this.cv + '%')
-          }
-        })
-      });
-
-      //carousel
-      $(document).ready(function() {
-          $("#owl-slider").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
-          });
-      });
-
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-	  
-	  /* ---------- Map ---------- */
-	$(function(){
-	  $('#map').vectorMap({
-	    map: 'world_mill_en',
-	    series: {
-	      regions: [{
-	        values: gdpData,
-	        scale: ['#000', '#000'],
-	        normalizeFunction: 'polynomial'
-	      }]
-	    },
-		backgroundColor: '#eef3f7',
-	    onLabelShow: function(e, el, code){
-	      el.html(el.html()+' (GDP - '+gdpData[code]+')');
-	    }
-	  });
-	});
-
-
-
-  </script>
-
-
- 
-
-
-
-
-
-
-
   </body>
 </html>

@@ -43,6 +43,8 @@
 
   <body>
   <!-- container section start -->
+
+  <div id="check">
   <section id="container" class="">
      
       
@@ -63,20 +65,15 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">张三</span>
+                            <span class="username">{{username}}</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li>
-                                <a href="login.html"><i class="icon_key_alt"></i> 退出</a>
+                                <a v-on:click="logout"><i class="icon_key_alt"></i> 退出</a>
                             </li>
-                            <li>
-                                <a href="documentation.html"><i class="icon_key_alt"></i> 修改密码</a>
-                            </li>
-                            <li>
-                                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
-                            </li>
+                           
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -89,7 +86,7 @@
       <!--sidebar start-->
      
 
-      
+          
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -121,7 +118,7 @@
                 <ul class="sub">
                     <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
                     <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
-                    <li><a class="" href="questionBody.html"> <span style="font-size:14px">查看运动处方报告  </span></a></li>
+                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">查看个人运动处方记录  </span></a></li>
                 </ul>
             </li>  
                            
@@ -253,6 +250,8 @@
       </section>
       <!--main content end-->
   </section>
+
+</div>
   <!-- container section start -->
 
     <!-- javascripts -->
@@ -271,7 +270,7 @@
     <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
     <script src="js/owl.carousel.js" ></script>
     <!-- jQuery full calendar -->
-    <<script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
+    <script src="js/fullcalendar.min.js"></script> <!-- Full Google Calendar - Calendar -->
 	<script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
     <script src="js/calendar-custom.js"></script>
@@ -295,6 +294,82 @@
 	<script src="js/sparklines.js"></script>	
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
+
+
+   
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/checklogin.js"></script>
+
+
+   
+    <script type="text/javascript">
+     
+      var loginUrl="login.html"
+      var logoutUrl="http://192.168.1.175:8080/auth/logout"
+      var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+  
+      
+       var vm = new Vue({
+              el: '#check',
+              data: {
+                  isLogin:'',
+                  username:''
+              },
+              methods: {
+  
+  
+                  logout:function(){
+                      axios({
+                          url: logoutUrl,
+                          method: "get",
+                          headers: {
+                              "Content-Type": "application/json"
+                          }
+                      }).then(function(response){
+                          if(response.data.status=='OK'){ 
+                              window.open(loginUrl,'_self')
+                              alert(response.data.msg)
+                             
+                          }
+  
+                      })
+                  },
+                  checkIsLogin:function(){
+                      axios({
+                          url:checkIsLoginUrl,
+                          method:'get',
+                          headers: {
+                              "Content-Type": "application/json"
+                          }
+                          }).then(function(response){
+                              if(!response.data.isLogin){
+                                  window.open(loginUrl,'_self')
+                              }
+                         })          
+                  }
+  
+  
+           
+              },
+              created() {   //自动触发写入的函数
+              this.username=JSON.parse(sessionStorage.getItem("username")); 
+              this.checkIsLogin()
+              }
+          });
+       
+      </script>
+
+
+
+
+
+
+
+
+<!-- 
+
   <script>
 
       //knob
@@ -346,7 +421,7 @@
   </script>
 
 
- 
+  -->
 
 
 
