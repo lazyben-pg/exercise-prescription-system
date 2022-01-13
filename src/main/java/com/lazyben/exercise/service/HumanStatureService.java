@@ -52,18 +52,6 @@ public class HumanStatureService {
 
     public List<HumanStature> createHumanStature(double[] data, HumanStature humanStature) {
         try {
-//            String[] arguments = new String[14];
-//            arguments[0] = "python3";
-//            arguments[1] = "src/main/resources/human_stature_predict.py";
-//            for (int i = 0; i < arguments.length - 2; i++) {
-//                arguments[i + 2] = String.valueOf(data[i]);
-//            }
-//            getHumanStatureByPost(data);
-//            Process process = Runtime.getRuntime().exec(arguments);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
-//            String line = in.readLine();
-//            process.waitFor();
-//            final int stature = Integer.parseInt(line);
             final int stature = getHumanStatureByPost(data);
             humanStature.setStature(stature);
             statureMapper.createHumanStature(humanStature.getUserid(),
@@ -79,6 +67,7 @@ public class HumanStatureService {
                     humanStature.getWeightControl(),
                     humanStature.getStandardWeight(),
                     humanStature.getBasalMetabolicRate(),
+                    humanStature.getHeartRateRest(),
                     humanStature.getStature());
             final List<HumanStature> result = statureMapper.getStatureByUserId(humanStature.getUserid());
             final List<Questionnaire> questionnaires = questionnaireMapper.getQuestionnaire(humanStature.getUserid());

@@ -31,6 +31,7 @@ CREATE TABLE userinfo
     standard_weight double,
     basal_metabolic_rate double,
     stature double,
+    heart_rate_rest double,
     created_at datetime
 );
 
@@ -56,4 +57,13 @@ CREATE TABLE questionnaire
     symptom int
 );
 
-insert into user (username, encrypted_password) values ('admin', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('luohongde', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('tanming', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('zhousha', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('shanghang', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('ruxu', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('zhuyeqing', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('lishichao', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('shixuejiao', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('gunian', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
+insert into user (username, encrypted_password) values ('xiongling', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class HumanStature {
     private int id;
     private int userid;
+    private double heartRateRest;
     private int sexual; // give
     private int age; // give
     private double height; //give
@@ -19,6 +20,14 @@ public class HumanStature {
     private double basalMetabolicRate; //give
     private int stature;
     private Timestamp createdAt;
+
+    public double getHeartRateRest() {
+        return heartRateRest;
+    }
+
+    public void setHeartRateRest(double heartRateRest) {
+        this.heartRateRest = heartRateRest;
+    }
 
     public int getSexual() {
         return sexual;
