@@ -54,7 +54,7 @@ public class PrescriptionService {
         if ("肥胖".equals(stature) || "超重".equals(stature)) {
             return nodeSearchService.getPrescription("超重或超胖", Constant.DEFAULT_NODE_TYPE);
         } else {
-            return nodeSearchService.getPrescription("健康成年人", Constant.DEFAULT_NODE_TYPE);
+            return nodeSearchService.getPrescription("健康成年人", "健康人群");
         }
     }
 

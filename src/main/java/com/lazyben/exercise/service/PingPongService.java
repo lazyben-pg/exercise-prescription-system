@@ -3,6 +3,7 @@ package com.lazyben.exercise.service;
 import com.alibaba.fastjson.JSON;
 import com.lazyben.exercise.entity.HumanStature;
 import com.lazyben.exercise.entity.PingPongFreq;
+import com.lazyben.exercise.entity.SearchResult;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -14,15 +15,20 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Component
 public class PingPongService {
     private final HumanStatureService humanStatureService;
+    private final PrescriptionService prescriptionService;
 
     @Autowired
-    public PingPongService(HumanStatureService humanStatureService) {
+    public PingPongService(HumanStatureService humanStatureService, PrescriptionService prescriptionService) {
         this.humanStatureService = humanStatureService;
+        this.prescriptionService = prescriptionService;
     }
 
     private double hrr(int age, double HRRest, double intensity) {
@@ -41,35 +47,92 @@ public class PingPongService {
         }
     }
 
-    private PingPongFreq calFreqByHR(HeartData heartData, double minHR, double maxHR) {
-        if (heartData.getName().equals("对抗比赛")) return new PingPongFreq(heartData.getName(), -1);
+    private PingPongFreq calFreqByHR(HeartData heartData, double minHR, double maxHR, int time) {
         if (heartData.getMean() < minHR) {
-            return new PingPongFreq(heartData.getName(), 40);
+            if (heartData.getName().equals("对抗比赛"))
+                return new PingPongFreq(heartData.getName(), -1, time + 10 + "min/d");
+            return new PingPongFreq(heartData.getName(), 40, null);
         } else if (heartData.getMean() > maxHR) {
-            return new PingPongFreq(heartData.getName(), 20);
+            if (heartData.getName().equals("对抗比赛"))
+                return new PingPongFreq(heartData.getName(), -1, time - 10 + "min/d");
+            return new PingPongFreq(heartData.getName(), 20, null);
         } else {
             if (heartData.getLine25() < minHR && heartData.getLine75() < maxHR) {
-                return new PingPongFreq(heartData.getName(), 40);
+                if (heartData.getName().equals("对抗比赛"))
+                    return new PingPongFreq(heartData.getName(), -1, time + 10 + "min/d");
+                return new PingPongFreq(heartData.getName(), 40, null);
             } else if (heartData.getLine25() > minHR && heartData.getLine75() > maxHR) {
-                return new PingPongFreq(heartData.getName(), 20);
+                if (heartData.getName().equals("对抗比赛"))
+                    return new PingPongFreq(heartData.getName(), -1, time - 10 + "min/d");
+                return new PingPongFreq(heartData.getName(), 20, null);
             } else {
-                return new PingPongFreq(heartData.getName(), 30);
+                if (heartData.getName().equals("对抗比赛"))
+                    return new PingPongFreq(heartData.getName(), -1, time + "min/d");
+                return new PingPongFreq(heartData.getName(), 30, null);
             }
         }
     }
 
+    private int[] getMaxMinIntensityByRange(String range) {
+        String rangeReg = "\\D*(\\d+)%-(\\d+)%HRR";
+        Pattern rangePattern = Pattern.compile(rangeReg);
+        Matcher matcher = rangePattern.matcher(range);
+        if (matcher.find()) return new int[]{Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2))};
+        else {
+            String singleReg = "\\D*(\\d+)%HRR";
+            Pattern singlePattern = Pattern.compile(singleReg);
+            matcher = singlePattern.matcher(range);
+            if (matcher.find()) return new int[]{Integer.parseInt(matcher.group(1))};
+        }
+        return new int[]{};
+    }
+
+    private String getTimeUnit(String time) {
+        String dayReg = "\\D*(\\d+)min/d\\D*";
+        final Pattern dayPattern = Pattern.compile(dayReg);
+        final Matcher matcher = dayPattern.matcher(time);
+        if (matcher.find()) return matcher.group(1);
+        return null;
+    }
+
     public List<PingPongFreq> calFreq(int userid) {
+        // 获取用户年龄和静息心率
         final List<HumanStature> humanStatures = humanStatureService.getHumanStature(userid);
         humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
         HumanStature humanStature = humanStatures.isEmpty() ? null : humanStatures.get(0);
         if (humanStature == null) return null;
         int age = humanStature.getAge();
         double HRRest = humanStature.getHeartRateRest();
-        double minHR = hrr(age, HRRest, 0.4);
-        double maxHR = hrr(age, HRRest, 0.59);
+
+        // 获取用户处方中的有氧强度范围
+        int maxIntensity = 0, minIntensity = 0;
+        final AtomicInteger time = new AtomicInteger(0);
+        final List<SearchResult> prescriptions = prescriptionService.getPrescription(userid);
+        if (prescriptions == null) return null;
+        for (SearchResult oneRelationshipPrescription : prescriptions) {
+            if ("有氧强度".equals(oneRelationshipPrescription.getRelationship())) {
+                String range = oneRelationshipPrescription.getResult().get(0);
+                final int[] maxMinIntensity = getMaxMinIntensityByRange(range);
+                if (maxMinIntensity.length == 0) return null;
+                if (maxMinIntensity.length == 1) return null;
+                if (maxMinIntensity.length == 2) {
+                    minIntensity = maxMinIntensity[0];
+                    maxIntensity = maxMinIntensity[1];
+                }
+            }
+            if ("有氧时间".equals(oneRelationshipPrescription.getRelationship())) {
+                final String timeStr = oneRelationshipPrescription.getResult().get(0);
+                final String timeUnit = getTimeUnit(timeStr);
+                if (timeUnit == null) time.set(-1);
+                else time.set(Integer.parseInt(timeUnit));
+            }
+        }
+
+        double minHR = hrr(age, HRRest, minIntensity * 1.0 / 100);
+        double maxHR = hrr(age, HRRest, maxIntensity * 1.0 / 100);
         try {
             final List<HeartData> calHeartRateData = getCalHeartRateData();
-            return calHeartRateData.stream().map(heartData -> calFreqByHR(heartData, minHR, maxHR)).collect(Collectors.toList());
+            return calHeartRateData.stream().map(heartData -> calFreqByHR(heartData, minHR, maxHR, time.get())).collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
             return null;
