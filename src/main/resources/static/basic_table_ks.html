@@ -66,7 +66,6 @@
                             <li>
                                 <a v-on:click="logout"><i class="icon_key_alt"></i> 退出</a>
                             </li>
-                            
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -81,7 +80,6 @@
         <!--sidebar start-->
 
 
-                
         <aside>
             <div id="sidebar"  class="nav-collapse "  font-size= 5px>
                 <!-- sidebar menu start-->
@@ -141,13 +139,13 @@
           </aside>
     
     
-
+    
         <!--main content start-->
         <section id="main-content">
             <section class="wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header"><i class="fa fa-table"></i>个性化运动处方</h3>
+                        <h3 class="page-header"><i class="fa fa-table"></i>对抗模式</h3>
                         <ol class="breadcrumb">
                             <li><i class="fa fa-home"></i><a href="index.html">{{symptom}}</a></li>
                             <li><i class="fa fa-table"></i></li>
@@ -158,6 +156,9 @@
             </section>
             <!-- page start-->
 
+
+
+
             <!-- 有氧 -->
             <div>
                 <!-- <div v-for="item in youyang">
@@ -167,22 +168,23 @@
                         <div class="col-sm-8  col-sm-offset-2">
                             <section class="panel">
                                 <header class="panel-heading no-border">
-                                    有氧
+                                    乒乓球对抗模式处方
                                 </header>
                                 <table class="table table-bordered table-hover">
-                                    <thead>
-                                
-                                    </thead>
                                     <tbody>
+                                     <tr>
+                                            <td > 对抗时间</td>
+                                            <td>{{actions.action6}}</td>
+                                     </tr>
                                     <tr>
                                     <td > 强度</td>
                                     
                                     <td v-for="qdu in youyang.qiangdu">{{qdu}}</td>
                                     </tr>
-                                    <tr>
+                                    <!-- <tr>
                                         <td>时间</td>
                                         <td v-for="sjian in youyang.shijian">{{sjian}}</td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <td>频率</td>
                                         <td v-for="plv in youyang.pinlv">{{plv}}</td>
@@ -295,33 +297,22 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/checklogin.js"></script>
 
-    <!-- <script>
-           console.log("测试登录")
-
-             var checkusername=JSON.parse(sessionStorage.getItem("username")); 
-                if(checkusername==null){
-                 window.open(loginUrl,'_self') 
-                 alert("未登录")
-                }
-       
-    </script> -->
 
     <script type="text/javascript">
         axios.defaults.withCredentials = true
-        var apiUrl = 'http://www.myapp.com:8080/prescription/pair?';
-  
+        var apiUrl = 'http://www.myapp.com:8080/prescription';
+
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
-
-
+        var  actionUrl="http://www.myapp.com:8080/pingpong"
+             
+        var loginUrl="login.html"
 
         var vm = new Vue({
             el: '#prescription',
             data: {
                 info: null,
-                userinfoId:'',
-                questionnaireId:'',
                 username:'',
                 symptom:'',
                 youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
@@ -330,17 +321,25 @@
                 user:{
                      username:'',
                      password:''
-                }
+                },
+                actions:{
+                        action1:'',
+                        action2:'',
+                        action3:'',
+                        action4:'',
+                        action5:'',
+                        action6:''
+                },
 
             },
             methods: {
                 GetHostData: function () {
-                    console.log(document.cookie)
+                  console.log(document.cookie)
 
                    this.username=JSON.parse(sessionStorage.getItem("username")); 
                    console.log(this.username)
                     axios({
-                        url: apiUrl+"userinfoId="+this.userinfoId+"&"+"questionnaireId="+this.questionnaireId,
+                        url: apiUrl,
                         data : JSON.stringify(this.user),
                         method: "get",
                         xhrFields: {withCredentials: true}
@@ -351,38 +350,64 @@
                         this.symptom=response.data.data[0].symptom
                         for (var i = 0; i < this.info.length; i++) {
                             if (this.info[i].relationship.indexOf("有氧") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.youyang.qiangdu = this.info[i].result
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.youyang.shijian = this.info[i].result
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.youyang.pinlv = this.info[i].result
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.youyang.fangshi = this.info[i].result
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.youyang.qiangdu = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.youyang.shijian = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.youyang.pinlv = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.youyang.fangshi = [this.info[i].result[0]]
                             }
                             if (this.info[i].relationship.indexOf("抗阻") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.kangzu.qiangdu = this.info[i].result
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.kangzu.shijian = this.info[i].result
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.kangzu.pinlv = this.info[i].result
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.kangzu.fangshi = this.info[i].result
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.kangzu.qiangdu = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.kangzu.shijian = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.kangzu.pinlv = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.kangzu.fangshi = [this.info[i].result[0]]
                             }
                             if (this.info[i].relationship.indexOf("柔韧性") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.rourx.qiangdu = this.info[i].result
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.rourx.shijian = this.info[i].result
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.rourx.pinlv = this.info[i].result
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.rourx.fangshi = this.info[i].result
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.rourx.qiangdu = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.rourx.shijian = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.rourx.pinlv = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.rourx.fangshi = [this.info[i].result[0]]
                             }
                         }
+
+
                         console.log(this.youyang)
 
                     });
                 },
+
+                GetAction: function (){  
+                    _this=this         
+                    axios({
+                          url: actionUrl,
+                          method: "get",
+                          headers: {
+                              "Content-Type": "application/json"
+                          }
+                      }).then(function(response){
+                         
+                          var info=response.data.data
+                          if(response.data.status=='OK'){ 
+                             _this.actions.action6=info[5].time
+                            //  _this.actions.action2=info[1].freq
+                            //  _this.actions.action3=info[2].freq
+                            //  _this.actions.action4=info[3].freq
+                            //  _this.actions.action5=info[4].freq
+                          }
+                             
+
+                            console.log("乒乓球")
+                            console.log(_this.actions)
+
+                      })
+
+                },
                 getId:function(){
                     var test = window.location.href
-                    var infoids = test.split("?userinfoId=")[1].split("&questionnaireId=")
-                    this.userinfoId=infoids[0]
-                    this.questionnaireId=infoids[1]
+                    this.bid = test.split("?id=")[1]
                     console.log("获取参数")
-                    console.log(infoids)
-               },
-
-               logout:function(){
+                    console.log(this.bid)
+                },
+                logout:function(){
                     axios({
                         url: logoutUrl,
                         method: "get",
@@ -412,14 +437,11 @@
                        })          
                 }
 
-
-
-
             },
             created() { 
-                this.checkIsLogin()
-                this.getId();
-                this.GetHostData();
+            this.checkIsLogin()
+            this.GetHostData()
+            this.GetAction()
             }
         });
     </script>

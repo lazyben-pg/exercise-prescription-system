@@ -66,7 +66,6 @@
                             <li>
                                 <a v-on:click="logout"><i class="icon_key_alt"></i> 退出</a>
                             </li>
-                            
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -81,7 +80,6 @@
         <!--sidebar start-->
 
 
-                
         <aside>
             <div id="sidebar"  class="nav-collapse "  font-size= 5px>
                 <!-- sidebar menu start-->
@@ -141,7 +139,7 @@
           </aside>
     
     
-
+    
         <!--main content start-->
         <section id="main-content">
             <section class="wrapper">
@@ -295,33 +293,21 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/checklogin.js"></script>
 
-    <!-- <script>
-           console.log("测试登录")
-
-             var checkusername=JSON.parse(sessionStorage.getItem("username")); 
-                if(checkusername==null){
-                 window.open(loginUrl,'_self') 
-                 alert("未登录")
-                }
-       
-    </script> -->
 
     <script type="text/javascript">
         axios.defaults.withCredentials = true
-        var apiUrl = 'http://www.myapp.com:8080/prescription/pair?';
-  
+        var apiUrl = 'http://www.myapp.com:8080/prescription';
+
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
-
-
+             
+        var loginUrl="login.html"
 
         var vm = new Vue({
             el: '#prescription',
             data: {
                 info: null,
-                userinfoId:'',
-                questionnaireId:'',
                 username:'',
                 symptom:'',
                 youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
@@ -335,12 +321,12 @@
             },
             methods: {
                 GetHostData: function () {
-                    console.log(document.cookie)
+                  console.log(document.cookie)
 
                    this.username=JSON.parse(sessionStorage.getItem("username")); 
                    console.log(this.username)
                     axios({
-                        url: apiUrl+"userinfoId="+this.userinfoId+"&"+"questionnaireId="+this.questionnaireId,
+                        url: apiUrl,
                         data : JSON.stringify(this.user),
                         method: "get",
                         xhrFields: {withCredentials: true}
@@ -372,17 +358,11 @@
                         console.log(this.youyang)
 
                     });
-                },
-                getId:function(){
-                    var test = window.location.href
-                    var infoids = test.split("?userinfoId=")[1].split("&questionnaireId=")
-                    this.userinfoId=infoids[0]
-                    this.questionnaireId=infoids[1]
-                    console.log("获取参数")
-                    console.log(infoids)
-               },
 
-               logout:function(){
+
+                    
+                },
+                logout:function(){
                     axios({
                         url: logoutUrl,
                         method: "get",
@@ -412,14 +392,10 @@
                        })          
                 }
 
-
-
-
             },
             created() { 
-                this.checkIsLogin()
-                this.getId();
-                this.GetHostData();
+            this.checkIsLogin()
+            this.GetHostData()
             }
         });
     </script>

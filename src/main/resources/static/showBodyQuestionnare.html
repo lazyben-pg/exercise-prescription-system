@@ -775,7 +775,7 @@
                                                                                     
                                                                                     <label for="0_answer_13_option_1">
                                                                                         A.
-                                                                                        <p class="ue" style="display: inline;">就地平躺，严格观察，期间不得站立或走动</p>
+                                                                                        <p class="ue" style="display: inline;">是</p>
                                                                                     </label>
                                                                                 </li>
                                                                             
@@ -788,36 +788,9 @@
                                                                                     
                                                                                     <label for="0_answer_13_option_2">
                                                                                         B.
-                                                                                        <p class="ue" style="display: inline;">应使其舒适平卧，保持空气流通，同时请医生或送医院诊冶</p>
+                                                                                        <p class="ue" style="display: inline;">否</p>
                                                                                     </label>
-                                                                                </li>
-                                                                            
-                                                                                <li class="option">
-                                                                                    
-                                                                                        <input v-model="answer.q13" type="radio" value="C" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_3"  disabled="disabled"
-                                                                                        />
-                                                                                    
-                                                                                    
-                                                                                    <label for="0_answer_13_option_3">
-                                                                                        C.
-                                                                                        <p class="ue" style="display: inline;">采用胸外心脏挤压法进行抢救</p>
-                                                                                    </label>
-                                                                                </li>
-                                                                            
-                                                                                <li class="option">
-                                                                                    
-                                                                                        <input v-model="answer.q13" type="radio" value="D" class="radioOrCheck" name="answer13"
-                                                                                            id="0_answer_13_option_4"  disabled="disabled"
-                                                                                        />
-                                                                                    
-                                                                                    
-                                                                                    <label for="0_answer_13_option_4">
-                                                                                        D.
-                                                                                        <p class="ue" style="display: inline;">采用口对口人工呼吸法抢救</p>
-                                                                                    </label>
-                                                                                </li>
-                                                                            
+                                                                                </li>                                                                                                                                           
                                                                         </ul>
                                                                     </div>
                                                                 </li>
@@ -923,20 +896,20 @@
 
     <!--   获取问卷答案  -->
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="js/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script type="text/javascript">
 
         //var qid=this.$route.query.id
-        var apiUrl = 'http://192.168.1.175:8080/questionnaire?id=';
+        var apiUrl = 'http://www.myapp.com:8080/questionnaire?id=';
         axios.defaults.withCredentials=true
 
 
 
         var loginUrl="login.html"
-        var logoutUrl="http://192.168.1.175:8080/auth/logout"
-        var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+        var logoutUrl="http://www.myapp.com:8080/auth/logout"
+        var checkIsLoginUrl="http://www.myapp.com:8080/auth"
 
 
 

@@ -55,7 +55,7 @@
 <!-- 注册 -->
  <!--遍历处方  -->
 
- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+ <script src="js/vue.js"></script>
  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
  <script type="text/javascript">
@@ -94,6 +94,7 @@
 						
 							sessionStorage.setItem('username',JSON.stringify(response.data.data.username));
 							console.log(JSON.parse(sessionStorage.getItem('username')));
+							
 							alert("注册成功");
 						}else{
 							alert(response.data.msg);

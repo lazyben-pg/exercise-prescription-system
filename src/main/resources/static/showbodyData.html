@@ -232,6 +232,13 @@
                                         <input type="text"   :disabled="true"  id="basalMetabolicRate"  v-model.number='user.basalMetabolicRate'    class="form-control" >
                                         </div>
                                     </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">静息心率</label>
+                                        <div class="col-sm-10">
+                                        <input type="text"     :disabled="true"   id="heartRateRest"  v-model.number='user.heartRateRest'    class="form-control" >
+                                       </div>
+                                    </div>
                           </div>
                         </div> 
                    </div>
@@ -244,15 +251,15 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+<script src="js/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    var apiUrl='http://192.168.1.175:8080/humanstature?id='
+    var apiUrl='http://www.myapp.com:8080/humanstature?id='
 
 
     var loginUrl="login.html"
-    var logoutUrl="http://192.168.1.175:8080/auth/logout"
-    var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+    var logoutUrl="http://www.myapp.com:8080/auth/logout"
+    var checkIsLoginUrl="http://www.myapp.com:8080/auth"
 
     
 
@@ -273,6 +280,7 @@
                 fatPercentage: '',
                 bodyMassIndex: '',
                 basalMetabolicRate: '',
+                heartRateRest:''
             } 
         },
         methods: {
@@ -298,6 +306,7 @@
                         _this.user.fatPercentage=response.data.data[0].fatPercentage
                         _this.user.bodyMassIndex=response.data.data[0].bodyMassIndex
                         _this.user.basalMetabolicRate=response.data.data[0].basalMetabolicRate
+                        _this.user.heartRateRest=response.data.data[0].heartRateRest
 
                       }else{
                         console.log(response.data.msg);
