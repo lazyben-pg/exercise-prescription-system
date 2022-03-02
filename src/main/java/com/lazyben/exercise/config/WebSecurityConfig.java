@@ -36,7 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**",
                         "/pair",
                         "/prescription/pair",
-                        "/pingpong").permitAll()
+                        "/pingpong",
+                        "feedback").permitAll()
                 .anyRequest().authenticated();
 
     }

@@ -25,6 +25,4 @@ public class HumanStatureResult extends Result<List<HumanStature>> {
     public static HumanStatureResult success(String msg, List<HumanStature> data, String stature) {
         return new HumanStatureResult(msg, ResultStatus.OK, data, stature);
     }
-
-
 }

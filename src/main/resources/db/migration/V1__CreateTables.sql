@@ -57,6 +57,19 @@ CREATE TABLE questionnaire
     symptom int
 );
 
+CREATE TABLE pingpong_prescription
+(
+    id bigint primary key auto_increment,
+    userid bigint,
+    forehand_attack varchar(20),
+    backhand_scoop_pass varchar(20),
+    backhand_push varchar(20),
+    fast_loop_drive varchar(20),
+    high_spin_loop_drive varchar(20),
+    race varchar(20)
+    created_at datetime,
+);
+
 insert into user (username, encrypted_password) values ('luohongde', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
 insert into user (username, encrypted_password) values ('tanming', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')
 insert into user (username, encrypted_password) values ('zhousha', '$2a$10$v0Y1rN.15Ddji2soT7ojy.Ha6T7xyFZzvZEWUlSWXmUxLCg91wBFi')

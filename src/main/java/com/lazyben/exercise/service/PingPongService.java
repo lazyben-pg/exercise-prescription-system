@@ -3,7 +3,9 @@ package com.lazyben.exercise.service;
 import com.alibaba.fastjson.JSON;
 import com.lazyben.exercise.entity.HumanStature;
 import com.lazyben.exercise.entity.PingPongFreq;
+import com.lazyben.exercise.entity.PingPongPrescription;
 import com.lazyben.exercise.entity.SearchResult;
+import com.lazyben.exercise.mapper.PingPongPrescriptionMapper;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,11 +27,13 @@ import java.util.stream.Collectors;
 public class PingPongService {
     private final HumanStatureService humanStatureService;
     private final PrescriptionService prescriptionService;
+    private final PingPongPrescriptionMapper pingPongPrescriptionMapper;
 
     @Autowired
-    public PingPongService(HumanStatureService humanStatureService, PrescriptionService prescriptionService) {
+    public PingPongService(HumanStatureService humanStatureService, PrescriptionService prescriptionService, PingPongPrescriptionMapper pingPongPrescriptionMapper) {
         this.humanStatureService = humanStatureService;
         this.prescriptionService = prescriptionService;
+        this.pingPongPrescriptionMapper = pingPongPrescriptionMapper;
     }
 
     private double hrr(int age, double HRRest, double intensity) {
@@ -38,7 +43,7 @@ public class PingPongService {
 
     private List<HeartData> getCalHeartRateData() throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://192.168.1.134:8081/cal/heartrate");
+        HttpGet httpGet = new HttpGet("http://192.168.1.143:8081/cal/heartrate");
         try {
             final CloseableHttpResponse response = client.execute(httpGet);
             return JSON.parseObject(EntityUtils.toString(response.getEntity()), ResultTmp.class).getData();
@@ -51,24 +56,24 @@ public class PingPongService {
         if (heartData.getMean() < minHR) {
             if (heartData.getName().equals("对抗比赛"))
                 return new PingPongFreq(heartData.getName(), -1, time + 10 + "min/d");
-            return new PingPongFreq(heartData.getName(), 40, null);
+            return new PingPongFreq(heartData.getName(), 40, time + "min/d");
         } else if (heartData.getMean() > maxHR) {
             if (heartData.getName().equals("对抗比赛"))
                 return new PingPongFreq(heartData.getName(), -1, time - 10 + "min/d");
-            return new PingPongFreq(heartData.getName(), 20, null);
+            return new PingPongFreq(heartData.getName(), 20, time + "min/d");
         } else {
             if (heartData.getLine25() < minHR && heartData.getLine75() < maxHR) {
                 if (heartData.getName().equals("对抗比赛"))
                     return new PingPongFreq(heartData.getName(), -1, time + 10 + "min/d");
-                return new PingPongFreq(heartData.getName(), 40, null);
+                return new PingPongFreq(heartData.getName(), 40, time + "min/d");
             } else if (heartData.getLine25() > minHR && heartData.getLine75() > maxHR) {
                 if (heartData.getName().equals("对抗比赛"))
                     return new PingPongFreq(heartData.getName(), -1, time - 10 + "min/d");
-                return new PingPongFreq(heartData.getName(), 20, null);
+                return new PingPongFreq(heartData.getName(), 20, time + "min/d");
             } else {
                 if (heartData.getName().equals("对抗比赛"))
                     return new PingPongFreq(heartData.getName(), -1, time + "min/d");
-                return new PingPongFreq(heartData.getName(), 30, null);
+                return new PingPongFreq(heartData.getName(), 30, time + "min/d");
             }
         }
     }
@@ -95,7 +100,39 @@ public class PingPongService {
         return null;
     }
 
+    private String[] splitResult(String s) {
+        return s.split(",");
+    }
+
+    public int getFreq(String s) {
+        return Integer.parseInt(splitResult(s)[0]);
+    }
+
+    public String getTime(String s) {
+        String[] splitResult = splitResult(s);
+        if (splitResult.length == 3 && splitResult[2].equals("*")) {
+            return splitResult[1] + "，建议用户增加间歇休息时间";
+        } else {
+            return splitResult[1];
+        }
+    }
+
     public List<PingPongFreq> calFreq(int userid) {
+        // 数据库存在数据，直接获取
+        List<PingPongPrescription> pingPongPrescriptionByUserId = pingPongPrescriptionMapper.getPingPongPrescriptionByUserId(userid);
+        if (!pingPongPrescriptionByUserId.isEmpty()) {
+            PingPongPrescription pingPongPrescription = pingPongPrescriptionByUserId.get(pingPongPrescriptionByUserId.size() - 1);
+            List<PingPongFreq> result = new ArrayList<>();
+            result.add(new PingPongFreq("正手快攻", getFreq(pingPongPrescription.getForehandAttack()), getTime(pingPongPrescription.getForehandAttack())));
+            result.add(new PingPongFreq("反手快拨", getFreq(pingPongPrescription.getBackhandScoopPass()), getTime(pingPongPrescription.getBackhandScoopPass())));
+            result.add(new PingPongFreq("反手搓球", getFreq(pingPongPrescription.getBackhandPush()), getTime(pingPongPrescription.getBackhandPush())));
+            result.add(new PingPongFreq("前冲弧圈", getFreq(pingPongPrescription.getFastLoopDrive()), getTime(pingPongPrescription.getFastLoopDrive())));
+            result.add(new PingPongFreq("加转弧圈", getFreq(pingPongPrescription.getHighSpinLoopDrive()), getTime(pingPongPrescription.getHighSpinLoopDrive())));
+            result.add(new PingPongFreq("对抗比赛", getFreq(pingPongPrescription.getRace()), getTime(pingPongPrescription.getRace())));
+            return result;
+        }
+
+
         // 获取用户年龄和静息心率
         final List<HumanStature> humanStatures = humanStatureService.getHumanStature(userid);
         humanStatures.sort(Comparator.comparing(HumanStature::getCreatedAt).reversed());
@@ -132,11 +169,26 @@ public class PingPongService {
         double maxHR = hrr(age, HRRest, maxIntensity * 1.0 / 100);
         try {
             final List<HeartData> calHeartRateData = getCalHeartRateData();
-            return calHeartRateData.stream().map(heartData -> calFreqByHR(heartData, minHR, maxHR, time.get())).collect(Collectors.toList());
+            List<PingPongFreq> collect = calHeartRateData.stream()
+                    .map(heartData -> calFreqByHR(heartData, minHR, maxHR, time.get()))
+                    .collect(Collectors.toList());
+            insertIntoDataBase(userid, collect);
+            return collect;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private void insertIntoDataBase(int userid, List<PingPongFreq> collect) {
+        List<String> collect1 = collect.stream().map(r -> r.getFreq() + "," + r.getTime()).collect(Collectors.toList());
+        pingPongPrescriptionMapper.insertPingPongPrescription(userid,
+                collect1.get(0),
+                collect1.get(1),
+                collect1.get(2),
+                collect1.get(3),
+                collect1.get(4),
+                collect1.get(5));
     }
 }
 
