@@ -155,7 +155,7 @@
               <!--overview start-->
 			  <div class="row">
 				<div class="col-lg-12">
-					<h3 class="page-header" style="color: red;"><i class="fa fa-laptop"></i> 乒乓球训练模式</h3>
+					<h3 class="page-header" style="color: red;"><i class="fa fa-laptop"></i> 乒乓球运动处方</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 						<li><i class="fa fa-laptop"></i>Dashboard</li>						  	
@@ -163,66 +163,109 @@
 				</div>
 			</div>
               
-      <div class="row" style="padding-left:100px ;">
+      <div class="row" style="padding-left:100px ;padding-top: 100px;">
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
-					<div class="info-box blue-bg">
-            <a href="basic_table.html">
-             <img src="./img/q1.png" style="width:150px;height:100px" >
-						<div class="count"></div>
-						<div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正手攻球</div>			
-            </a>
-					 			
-					</div><!--/.info-box-->			
+                                <div class="info-box brown-bg">
+                        <a href="basic_table.html">
+                        <img src="./img/q1.png" style="width:150px;height:100px" >
+                                    <div class="count"></div>
+                                    <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正手快攻</div>	<br/>	
+                                <div class="title" style="font-size: 14px;"><span style="color:black;">&nbsp;&nbsp;挥拍频率：{{actions.action1}}次/分钟</span></div>		
+                        </a>
+                                            
+                                </div><!--/.info-box-->			
 				</div><!--/.col-->
 				
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
-					<div class="info-box brown-bg">
-					 <a href="basic_table.html">
-             <img src="./img/q2.png" style="width:150px;height:100px" >
-						<div class="count"></div>
-						<div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手快拨</div>			
-            </a>
-            
-            
-					</div><!--/.info-box-->			
+                                <div class="info-box brown-bg">
+                                <a :href="getGoodsHref(2)">
+                        <img src="./img/q2.png" style="width:150px;height:100px" >
+                                    <div class="count"></div>
+                                    <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手快拨</div>	<br/>	
+                                    <div class="title" style="font-size: 14px;"><span style="color: black;">&nbsp;&nbsp;挥拍频率：{{actions.action2}}次/分钟</span></div>		
+                        </a>
+                        
+                        
+                                </div><!--/.info-box-->			
 				</div><!--/.col-->	
 				
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box dark-bg">
-            <a href="basic_table.html">
-              <img src="./img/q3.png" style="width:150px;height:100px" >
-             <div class="count"></div>
-             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手搓球</div>			
-             </a>			
-					</div><!--/.info-box-->			
+                            <div class="info-box brown-bg">
+                    <a :href="getGoodsHref(3)">
+                    <img src="./img/q3.png" style="width:150px;height:100px" >
+                    <div class="count"></div>
+                    <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手搓球</div><br/>	
+                    <div class="title" style="font-size: 14px;"><span style="color: black;">&nbsp;&nbsp;挥拍频率：{{actions.action3}}次/分钟</span></div>			
+                    </a>			
+                            </div><!--/.info-box-->			
 				</div><!--/.col-->
 				
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box green-bg">
-            <a href="basic_table.html">
-              <img src="./img/q4.png" style="width:150px;height:100px" >
-             <div class="count"></div>
-             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前冲弧圈</div>			
-             </a>		
-					</div><!--/.info-box-->			
+                                <div class="info-box brown-bg">
+                        <a :href="getGoodsHref(4)">
+                        <img src="./img/q4.png" style="width:150px;height:100px" >
+                        <div class="count"></div>
+                        <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前冲弧圈</div><br/>	
+                        <div class="title" style="font-size: 14px;"><span style="color: black;">&nbsp;&nbsp;挥拍频率：{{actions.action4}}次/分钟</span></div>			
+                        </a>		
+                                </div><!--/.info-box-->			
 				</div><!--/.col-->
         <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-					<div class="info-box red-bg">
-            <a href="basic_table.html">
-              <img src="./img/q5.png" style="width:150px;height:100px" >
-             <div class="count"></div>
-             <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加转弧圈</div>			
-             </a>
-					</div><!--/.info-box-->			
-				</div><!--/.col-->
+					<div class="info-box brown-bg">
+                        <a :href="getGoodsHref(5)">
+                        <img src="./img/q5.png" style="width:150px;height:100px" >
+                        <div class="count"></div>
+                        <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加转弧圈</div>	<br/>	
+                        <div class="title" style="font-size: 14px;"><span style="color: black;">&nbsp;&nbsp;挥拍频率：{{actions.action5}}次/分钟</span></div>			
+                        </a>
+                  </div><!--/.info-box-->			
+	   </div>
+
+       <!--/.col-->
 				
                 
+
+
 			</div><!--/.row-->
 
 
-
+<!-- 有氧============ -->
+       <!-- <div class="row" style="padding-right: 150px;">
+        <div class="col-sm-8  col-sm-offset-2">
+            <section class="panel">
+                <header class="panel-heading no-border">
+                    有氧
+                </header>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                
+                    </thead>
+                    <tbody>
+                    <tr>
+                    <td > 强度</td>
+                    
+                    <td v-for="qdu in youyang.qiangdu">{{qdu}}</td>
+                    </tr>
+                    <tr>
+                        <td>时间</td>
+                        <td v-for="sjian in youyang.shijian">{{sjian}}</td>
+                    </tr>
+                    <tr>
+                        <td>频率</td>
+                        <td v-for="plv in youyang.pinlv">{{plv}}</td>
+                    </tr>
+                    <tr>
+                        <td>方式</td>
+                        <td v-for="fshi in youyang.fangshi" >{{fshi}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    
+    </div> -->
   
             
 		  
@@ -298,7 +341,7 @@
 
    
     
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="js/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/checklogin.js"></script>
 
@@ -307,19 +350,93 @@
     <script type="text/javascript">
      
       var loginUrl="login.html"
-      var logoutUrl="http://192.168.1.175:8080/auth/logout"
-      var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+      var logoutUrl="http://www.myapp.com:8080/auth/logout"
+      var checkIsLoginUrl="http://www.myapp.com:8080/auth"
+
+      var  actionUrl="http://www.myapp.com:8080/pingpong"
+      var  prescriptionUrl = 'http://www.myapp.com:8080/prescription';
   
       
        var vm = new Vue({
               el: '#check',
               data: {
-                  isLogin:'',
-                  username:''
+                    isLogin:'',
+                    username:'',
+                    actions:{
+                        action1:'',
+                        action2:'',
+                        action3:'',
+                        action4:'',
+                        action5:'',
+                        action6:'',
+                    },
+                    youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]}
               },
               methods: {
-  
-  
+                GetHostData: function (){  
+                    _this=this         
+                    axios({
+                          url: actionUrl,
+                          method: "get",
+                          headers: {
+                              "Content-Type": "application/json"
+                          }
+                      }).then(function(response){
+                         
+                          var info=response.data.data
+                          if(response.data.status=='OK'){ 
+                             _this.actions.action1=info[0].freq
+                             _this.actions.action2=info[1].freq
+                             _this.actions.action3=info[2].freq
+                             _this.actions.action4=info[3].freq
+                             _this.actions.action5=info[4].freq
+                             _this.actions.action6=info[5].time
+                          }
+                             
+
+                            console.log("乒乓球")
+                            console.log(_this.actions)
+
+                      })
+
+                },
+
+                getprescription:function(){
+                    axios({
+                        url: prescriptionUrl,
+                        data : JSON.stringify(this.user),
+                        method: "get",
+                        xhrFields: {withCredentials: true}
+                    }).then(response => {
+                        console.log(response.data.data)
+                        console.log("测试")
+                        this.info = response.data.data
+                        this.symptom=response.data.data[0].symptom
+                        for (var i = 0; i < this.info.length; i++) {
+                            if (this.info[i].relationship.indexOf("有氧") != -1) {
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.youyang.qiangdu = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.youyang.shijian = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.youyang.pinlv = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.youyang.fangshi = [this.info[i].result[0]]
+                            }
+                            if (this.info[i].relationship.indexOf("抗阻") != -1) {
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.kangzu.qiangdu = this.info[i].result
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.kangzu.shijian = this.info[i].result
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.kangzu.pinlv = this.info[i].result
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.kangzu.fangshi = this.info[i].result
+                            }
+                            if (this.info[i].relationship.indexOf("柔韧性") != -1) {
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.rourx.qiangdu = this.info[i].result
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.rourx.shijian = this.info[i].result
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.rourx.pinlv = this.info[i].result
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.rourx.fangshi = this.info[i].result
+                            }
+                        }
+                        console.log(this.youyang)
+
+                    });
+
+                },
                   logout:function(){
                       axios({
                           url: logoutUrl,
@@ -348,14 +465,18 @@
                                   window.open(loginUrl,'_self')
                               }
                          })          
-                  }
+                  },
+                  getGoodsHref:function(val){
+	                 return './basic_table.html.html?actionid='+val
+            	}
   
-  
-           
+
               },
               created() {   //自动触发写入的函数
               this.username=JSON.parse(sessionStorage.getItem("username")); 
-              this.checkIsLogin()
+            //   this.checkIsLogin()
+              this.GetHostData()
+              this.getprescription()
               }
           });
        

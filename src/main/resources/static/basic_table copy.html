@@ -122,7 +122,7 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="basic_table_ks.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
+                        <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
                         <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                     </ul>
                   </li>  
@@ -156,9 +156,6 @@
             </section>
             <!-- page start-->
 
-
-
-
             <!-- 有氧 -->
             <div>
                 <!-- <div v-for="item in youyang">
@@ -168,14 +165,13 @@
                         <div class="col-sm-8  col-sm-offset-2">
                             <section class="panel">
                                 <header class="panel-heading no-border">
-                                    正手快攻处方
+                                    有氧
                                 </header>
                                 <table class="table table-bordered table-hover">
+                                    <thead>
+                                
+                                    </thead>
                                     <tbody>
-                                     <tr>
-                                            <td > 挥拍频率</td>
-                                            <td>{{actions.action1}}次/min</td>
-                                     </tr>
                                     <tr>
                                     <td > 强度</td>
                                     
@@ -305,7 +301,6 @@
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
-        var  actionUrl="http://www.myapp.com:8080/pingpong"
              
         var loginUrl="login.html"
 
@@ -321,14 +316,7 @@
                 user:{
                      username:'',
                      password:''
-                },
-                actions:{
-                        action1:'',
-                        action2:'',
-                        action3:'',
-                        action4:'',
-                        action5:''
-                },
+                }
 
             },
             methods: {
@@ -349,62 +337,30 @@
                         this.symptom=response.data.data[0].symptom
                         for (var i = 0; i < this.info.length; i++) {
                             if (this.info[i].relationship.indexOf("有氧") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.youyang.qiangdu = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.youyang.shijian = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.youyang.pinlv = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.youyang.fangshi = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.youyang.qiangdu = this.info[i].result
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.youyang.shijian = this.info[i].result
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.youyang.pinlv = this.info[i].result
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.youyang.fangshi = this.info[i].result
                             }
                             if (this.info[i].relationship.indexOf("抗阻") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.kangzu.qiangdu = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.kangzu.shijian = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.kangzu.pinlv = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.kangzu.fangshi = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.kangzu.qiangdu = this.info[i].result
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.kangzu.shijian = this.info[i].result
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.kangzu.pinlv = this.info[i].result
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.kangzu.fangshi = this.info[i].result
                             }
                             if (this.info[i].relationship.indexOf("柔韧性") != -1) {
-                                if (this.info[i].relationship.indexOf("强度") != -1) this.rourx.qiangdu = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("时间") != -1) this.rourx.shijian = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("频率") != -1) this.rourx.pinlv = [this.info[i].result[0]]
-                                if (this.info[i].relationship.indexOf("方式") != -1) this.rourx.fangshi = [this.info[i].result[0]]
+                                if (this.info[i].relationship.indexOf("强度") != -1) this.rourx.qiangdu = this.info[i].result
+                                if (this.info[i].relationship.indexOf("时间") != -1) this.rourx.shijian = this.info[i].result
+                                if (this.info[i].relationship.indexOf("频率") != -1) this.rourx.pinlv = this.info[i].result
+                                if (this.info[i].relationship.indexOf("方式") != -1) this.rourx.fangshi = this.info[i].result
                             }
                         }
-
-
                         console.log(this.youyang)
 
                     });
-                },
 
-                GetAction: function (){  
-                    _this=this         
-                    axios({
-                          url: actionUrl,
-                          method: "get",
-                          headers: {
-                              "Content-Type": "application/json"
-                          }
-                      }).then(function(response){
-                         
-                          var info=response.data.data
-                          if(response.data.status=='OK'){ 
-                             _this.actions.action1=info[0].freq
-                            //  _this.actions.action2=info[1].freq
-                            //  _this.actions.action3=info[2].freq
-                            //  _this.actions.action4=info[3].freq
-                            //  _this.actions.action5=info[4].freq
-                          }
-                             
 
-                            console.log("乒乓球")
-                            console.log(_this.actions)
-
-                      })
-
-                },
-                getId:function(){
-                    var test = window.location.href
-                    this.bid = test.split("?id=")[1]
-                    console.log("获取参数")
-                    console.log(this.bid)
+                    
                 },
                 logout:function(){
                     axios({
@@ -440,7 +396,6 @@
             created() { 
             this.checkIsLogin()
             this.GetHostData()
-            this.GetAction()
             }
         });
     </script>

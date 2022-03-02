@@ -122,7 +122,7 @@
                 </ul>
             </li>  
                            
-               <li class="sub-menu">
+               <!-- <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
                     <span style="font-size:13px">当前运动处方</span>
@@ -132,7 +132,14 @@
                     <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
                     <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                 </ul>
-              </li>  
+              </li>   -->
+
+              <li>
+                <a class="" href="trainpingpang.html">
+                    <i class="icon_genius"></i> 
+                    <span style="font-size:14px">乒乓球运动处方</span>
+                </a>
+            </li>
               
               <li>
                 <a class="" href="feedBackQuestion.html">
@@ -169,7 +176,7 @@
          <!-- <img src="./img/loginbg.png" style="width: 1100px;height: 400px;">        -->
         
         <h1> 欢迎来到运动处方系统</h1>
-        <h2>首先填写个人问卷----->然后输入体脂称的参数-----> 最后就可以得到个性化的运动处方</h2>
+        <h2>首先填写个人问卷----->然后输入体脂称的参数-----> 最后得到个性化的运动处方</h2>
 
 			</div><!--/.row-->
 
@@ -224,7 +231,7 @@
 	<script src="js/jquery.slimscroll.min.js"></script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="js/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/checklogin.js"></script>
 
@@ -232,8 +239,8 @@
     <script type="text/javascript">
      
     var loginUrl="login.html"
-    var logoutUrl="http://192.168.1.175:8080/auth/logout"
-    var checkIsLoginUrl="http://192.168.1.175:8080/auth"
+    var logoutUrl="http://www.myapp.com:8080/auth/logout"
+    var checkIsLoginUrl="http://www.myapp.com:8080/auth"
 
     
      var vm = new Vue({
