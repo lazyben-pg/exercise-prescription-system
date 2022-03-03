@@ -43,7 +43,7 @@ public class PingPongService {
 
     private List<HeartData> getCalHeartRateData() throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet("http://192.168.1.143:8081/cal/heartrate");
+        HttpGet httpGet = new HttpGet("http://myapp.com:8081/cal/heartrate");
         try {
             final CloseableHttpResponse response = client.execute(httpGet);
             return JSON.parseObject(EntityUtils.toString(response.getEntity()), ResultTmp.class).getData();
