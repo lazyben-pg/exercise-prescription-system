@@ -117,6 +117,25 @@ public class PingPongService {
         }
     }
 
+    public List<List<PingPongFreq>> getAllPingPong(int userid) {
+        List<PingPongPrescription> pingPongPrescriptionByUserId = pingPongPrescriptionMapper.getPingPongPrescriptionByUserId(userid);
+        if (!pingPongPrescriptionByUserId.isEmpty()) {
+            ArrayList<List<PingPongFreq>> result = new ArrayList<>();
+            for (PingPongPrescription p : pingPongPrescriptionByUserId) {
+                List<PingPongFreq> tmp = new ArrayList<>();
+                tmp.add(new PingPongFreq("正手快攻", getFreq(p.getForehandAttack()), getTime(p.getForehandAttack())));
+                tmp.add(new PingPongFreq("反手快拨", getFreq(p.getBackhandScoopPass()), getTime(p.getBackhandScoopPass())));
+                tmp.add(new PingPongFreq("反手搓球", getFreq(p.getBackhandPush()), getTime(p.getBackhandPush())));
+                tmp.add(new PingPongFreq("前冲弧圈", getFreq(p.getFastLoopDrive()), getTime(p.getFastLoopDrive())));
+                tmp.add(new PingPongFreq("加转弧圈", getFreq(p.getHighSpinLoopDrive()), getTime(p.getHighSpinLoopDrive())));
+                tmp.add(new PingPongFreq("对抗比赛", getFreq(p.getRace()), getTime(p.getRace())));
+                result.add(tmp);
+            }
+            return result;
+        }
+        return null;
+    }
+
     public List<PingPongFreq> calFreq(int userid) {
         // 数据库存在数据，直接获取
         List<PingPongPrescription> pingPongPrescriptionByUserId = pingPongPrescriptionMapper.getPingPongPrescriptionByUserId(userid);
