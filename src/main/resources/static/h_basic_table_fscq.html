@@ -162,11 +162,11 @@
             <section class="wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header"><i class="fa fa-table"></i>个性化运动处方</h3>
+                        <h3 class="page-header"><i class="fa fa-table"></i>历史个性化乒乓球运动处方</h3>
                         <ol class="breadcrumb">
                             <li><i class="fa fa-home"></i><a href="index.html">{{symptom}}</a></li>
-                            <li><i class="fa fa-table"></i></li>
-                            <li><i class="fa fa-th-list"></i>乒乓球运动处方</li>
+                            <li><i class="fa fa-table"></i>创建处方日期</li>
+                            <li><i class="fa fa-th-list"></i>{{createdAt}}</li>
                         </ol>
                     </div>
                 </div>
@@ -322,7 +322,7 @@
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
-        var  actionUrl="http://www.myapp.com:8080/pingpong"
+        var  actionUrl="http://www.myapp.com:8080/pingpong/get?id="
              
         var loginUrl="login.html"
 
@@ -332,6 +332,8 @@
                 info: null,
                 username:'',
                 symptom:'',
+                prescriptionId:'',
+                createdAt:'',
                 youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 kangzu:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 rourx:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
@@ -394,7 +396,7 @@
                 GetAction: function (){  
                     _this=this         
                     axios({
-                          url: actionUrl,
+                          url: actionUrl+_this.prescriptionId,
                           method: "get",
                           headers: {
                               "Content-Type": "application/json"
@@ -402,12 +404,24 @@
                       }).then(function(response){
                          
                           var info=response.data.data
+                          console.log("反手搓球")
+                          console.log(info)
                           if(response.data.status=='OK'){ 
                             //  _this.actions.action1=info[0].freq
                             //  _this.actions.action2=info[1].freq
                              _this.actions.action3=info[2].freq
                             //  _this.actions.action4=info[3].freq
                             //  _this.actions.action5=info[4].freq
+                          }
+
+                          if(response.data.status='OK'){
+                            var str=info[0]['createdAt']
+                            console.log("测试时间")
+                            console.log(str)
+                            var time_str=str.split("T")[0]
+
+                             _this.createdAt=time_str
+
                           }
                              
 
@@ -417,12 +431,12 @@
                       })
 
                 },
-                getId:function(){
+                getPrescriptionId:function(){
                     var test = window.location.href
-                    this.bid = test.split("?id=")[1]
-                    console.log("获取参数")
-                    console.log(this.bid)
-                },
+                    this.prescriptionId = test.split("?prescriptionId=")[1]
+                    console.log("获取乒乓球处方ID参数")
+                    console.log(this.prescriptionId)
+                 },
                 logout:function(){
                     axios({
                         url: logoutUrl,
@@ -456,6 +470,7 @@
             },
             created() { 
             this.checkIsLogin()
+            this.getPrescriptionId()
             this.GetHostData()
             this.GetAction()
             }

@@ -79,7 +79,6 @@
 
         <!--sidebar start-->
 
-
           
         <aside>
             <div id="sidebar"  class="nav-collapse "  font-size= 5px>
@@ -185,13 +184,13 @@
                         <div class="col-sm-8  col-sm-offset-2">
                             <section class="panel">
                                 <header class="panel-heading no-border">
-                                   反手搓球处方
+                                   前冲弧圈
                                 </header>
                                 <table class="table table-bordered table-hover">
                                     <tbody>
                                      <tr>
                                             <td > 挥拍频率</td>
-                                            <td>{{actions.action3}}次/min</td>
+                                            <td>{{actions.action4}}次/min</td>
                                      </tr>
                                     <tr>
                                     <td > 强度</td>
@@ -322,7 +321,7 @@
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
-        var  actionUrl="http://www.myapp.com:8080/pingpong"
+        var  actionUrl="http://www.myapp.com:8080/pingpong/get?id="
              
         var loginUrl="login.html"
 
@@ -332,6 +331,8 @@
                 info: null,
                 username:'',
                 symptom:'',
+                prescriptionId:'',
+                createdAt:'',
                 youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 kangzu:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 rourx:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
@@ -394,7 +395,7 @@
                 GetAction: function (){  
                     _this=this         
                     axios({
-                          url: actionUrl,
+                          url: actionUrl+_this.prescriptionId,
                           method: "get",
                           headers: {
                               "Content-Type": "application/json"
@@ -402,12 +403,24 @@
                       }).then(function(response){
                          
                           var info=response.data.data
+                          console.log("反手搓球")
+                         
                           if(response.data.status=='OK'){ 
                             //  _this.actions.action1=info[0].freq
                             //  _this.actions.action2=info[1].freq
-                             _this.actions.action3=info[2].freq
-                            //  _this.actions.action4=info[3].freq
+                            //  _this.actions.action3=info[2].freq
+                             _this.actions.action4=info[3].freq
                             //  _this.actions.action5=info[4].freq
+                          }
+
+                          if(response.data.status='OK'){
+                            var str=info[0]['createdAt']
+                            console.log("测试时间")
+                            console.log(str)
+                            var time_str=str.split("T")[0]
+
+                             _this.createdAt=time_str
+
                           }
                              
 
@@ -417,12 +430,12 @@
                       })
 
                 },
-                getId:function(){
+                getPrescriptionId:function(){
                     var test = window.location.href
-                    this.bid = test.split("?id=")[1]
-                    console.log("获取参数")
-                    console.log(this.bid)
-                },
+                    this.prescriptionId = test.split("?prescriptionId=")[1]
+                    console.log("获取乒乓球处方ID参数")
+                    console.log(this.prescriptionId)
+                 },
                 logout:function(){
                     axios({
                         url: logoutUrl,
@@ -456,11 +469,13 @@
             },
             created() { 
             this.checkIsLogin()
+            this.getPrescriptionId()
             this.GetHostData()
             this.GetAction()
             }
         });
     </script>
+
 
 
 </body>

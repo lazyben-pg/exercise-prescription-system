@@ -166,7 +166,7 @@
                         <ol class="breadcrumb">
                             <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
                             <li><i class="fa fa-table"></i>Table</li>
-                            <li><i class="fa fa-th-list"></i> 乒乓球运动处方管理</li>
+                            <li><i class="fa fa-th-list"></i> 个人运动处方管理</li>
                         </ol>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                         <div class="col-lg-12">
                             <section class="panel">
                                 <header class="panel-heading">
-                                    乒乓球运动处方管理
+                                    个人运动处方管理
                                 </header>
                                 <div class="table-responsive">
                                 <table class="table">
@@ -185,7 +185,7 @@
                                     <tr>
                                         <th>序号</th>
                                         <th>日期</th>
-                                        <th>具体处方</th>
+                                        <th>个人问卷调查</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -194,7 +194,7 @@
                                         <td>{{item.createdAt}}</td> 
                                         <td>
                                             <!-- <a href="./showBodyQuestionnare.html?id='{{item.qid}}'">点击查看</a> -->
-                                            <a :href="getGoodsHref(item.pingid)">点击查看</a>
+                                            <a :href="getGoodsHref(item.questionnaireId,item.userinfoId)">点击查看</a>
                                             <!-- <router-link :to="{name:'Index', params: { userId: 123 }}">link</router-link> -->
                                         </td>              
                                     </tr>                                               
@@ -233,9 +233,11 @@
 
     <script type="text/javascript">
        axios.defaults.withCredentials = true
-        // var apiUrl = 'http://www.myapp.com:8080/pair'
+        var apiUrl = 'http://www.myapp.com:8080/pair'
          
-        var apiUrl='http://www.myapp.com:8080/pingpongs'
+        function formatDate(now) { 
+            return Date(parseInt(now) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+        }  
         
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
@@ -263,21 +265,22 @@
                         xhrFields: {withCredentials: true}
                     }).then(function(response){
 						console.log(response.data.data)
-                        var PrescriptionData=response.data.data
+                        var QuestionData=response.data.data
                         _this.info = []
 
-                        for(var i=0;i<PrescriptionData.length;i++){
+                        for(var i=0;i<QuestionData.length;i++){
                       
-                         
-                            var str=PrescriptionData[i][0]['createdAt']
+                            //  console.log(Date(parseInt(QuestionData[i]['createdAt']) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ')) 
+                            var str=QuestionData[i]['createdAt']
                        
                             console.log("测试时间")
                             console.log(str)
                             var time_str=str.split("T")[0]
 
                             _this.info[i] = {
-                                pingid : PrescriptionData[i][0]['id'],
+                                questionnaireId : QuestionData[i]['questionnaireId'],
                                 createdAt:time_str,
+                                userinfoId:QuestionData[i]['userinfoId']
 
                             }
                         }
@@ -287,8 +290,8 @@
 					})
 
                 },
-                getGoodsHref:function(pingid){
-	                 return './trainpingpangHistory.html?pingid='+pingid
+                getGoodsHref:function(questionnaireId,userinfoId){
+	                 return './showHistoryPrescription.html?userinfoId='+userinfoId+"&"+"questionnaireId="+questionnaireId
             	},
                 logout:function(){
                     axios({

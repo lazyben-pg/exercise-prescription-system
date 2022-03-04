@@ -168,7 +168,13 @@
                                    基础运动处方
                                 </header>
                                 <table class="table table-bordered table-hover">
-                                    <tbody>                         
+                                    <tbody>  
+                                    <tr>
+                                        <td > 体质分类结果</td>
+                                        
+                                        <td>{{stature}}</td>
+                                    </tr>
+                                    
                                     <tr>
                                     <td > 强度</td>
                                     
@@ -295,6 +301,8 @@
         axios.defaults.withCredentials = true
         var apiUrl = 'http://www.myapp.com:8080/prescription';
 
+        var apiUrl_stature ='http://www.myapp.com:8080/humanstatures'
+
         var loginUrl="login.html"
         var logoutUrl="http://www.myapp.com:8080/auth/logout"
         var checkIsLoginUrl="http://www.myapp.com:8080/auth"
@@ -308,6 +316,7 @@
                 info: null,
                 username:'',
                 symptom:'',
+                stature:'',
                 youyang:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 kangzu:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
                 rourx:{qiangdu:[],shijian:[],pinlv:[],fangshi:[]},
@@ -393,6 +402,30 @@
                       })
 
                 },
+
+                GetStature: function (){  
+                    _this=this         
+                    axios({
+                          url: apiUrl_stature,
+                          method: "get",
+                          headers: {
+                              "Content-Type": "application/json"
+                          }
+                      }).then(function(response){
+                         
+                          var info=response.data.data
+                          if(response.data.status=='OK'){ 
+                            _this.stature=  response.data.stature
+                          }
+                             
+
+                            console.log("体质分类")
+                            console.log(_this.stature)
+
+                      })
+
+                },
+
                 getId:function(){
                     var test = window.location.href
                     this.bid = test.split("?id=")[1]
@@ -434,6 +467,7 @@
             this.checkIsLogin()
             this.GetHostData()
             this.GetAction()
+            this.GetStature()
             }
         });
     </script>
