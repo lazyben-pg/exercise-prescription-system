@@ -123,14 +123,30 @@ public class PingPongService {
             ArrayList<List<PingPongFreq>> result = new ArrayList<>();
             for (PingPongPrescription p : pingPongPrescriptionByUserId) {
                 List<PingPongFreq> tmp = new ArrayList<>();
-                tmp.add(new PingPongFreq("正手快攻", getFreq(p.getForehandAttack()), getTime(p.getForehandAttack()), p.getCreatedAt()));
-                tmp.add(new PingPongFreq("反手快拨", getFreq(p.getBackhandScoopPass()), getTime(p.getBackhandScoopPass()), p.getCreatedAt()));
-                tmp.add(new PingPongFreq("反手搓球", getFreq(p.getBackhandPush()), getTime(p.getBackhandPush()), p.getCreatedAt()));
-                tmp.add(new PingPongFreq("前冲弧圈", getFreq(p.getFastLoopDrive()), getTime(p.getFastLoopDrive()), p.getCreatedAt()));
-                tmp.add(new PingPongFreq("加转弧圈", getFreq(p.getHighSpinLoopDrive()), getTime(p.getHighSpinLoopDrive()), p.getCreatedAt()));
-                tmp.add(new PingPongFreq("对抗比赛", getFreq(p.getRace()), getTime(p.getRace()), p.getCreatedAt()));
+                tmp.add(new PingPongFreq("正手快攻", getFreq(p.getForehandAttack()), getTime(p.getForehandAttack()), p.getCreatedAt(), p.getId()));
+                tmp.add(new PingPongFreq("反手快拨", getFreq(p.getBackhandScoopPass()), getTime(p.getBackhandScoopPass()), p.getCreatedAt(), p.getId()));
+                tmp.add(new PingPongFreq("反手搓球", getFreq(p.getBackhandPush()), getTime(p.getBackhandPush()), p.getCreatedAt(), p.getId()));
+                tmp.add(new PingPongFreq("前冲弧圈", getFreq(p.getFastLoopDrive()), getTime(p.getFastLoopDrive()), p.getCreatedAt(), p.getId()));
+                tmp.add(new PingPongFreq("加转弧圈", getFreq(p.getHighSpinLoopDrive()), getTime(p.getHighSpinLoopDrive()), p.getCreatedAt(), p.getId()));
+                tmp.add(new PingPongFreq("对抗比赛", getFreq(p.getRace()), getTime(p.getRace()), p.getCreatedAt(), p.getId()));
                 result.add(tmp);
             }
+            return result;
+        }
+        return null;
+    }
+
+    public List<PingPongFreq> getPingPongById(int id, int userid) {
+        PingPongPrescription p = pingPongPrescriptionMapper.getPingPongPrescriptionById(id);
+        if (p != null) {
+            if (p.getUserid() != userid) return null;
+            ArrayList<PingPongFreq> result = new ArrayList<>();
+            result.add(new PingPongFreq("正手快攻", getFreq(p.getForehandAttack()), getTime(p.getForehandAttack()), p.getCreatedAt(), p.getId()));
+            result.add(new PingPongFreq("反手快拨", getFreq(p.getBackhandScoopPass()), getTime(p.getBackhandScoopPass()), p.getCreatedAt(), p.getId()));
+            result.add(new PingPongFreq("反手搓球", getFreq(p.getBackhandPush()), getTime(p.getBackhandPush()), p.getCreatedAt(), p.getId()));
+            result.add(new PingPongFreq("前冲弧圈", getFreq(p.getFastLoopDrive()), getTime(p.getFastLoopDrive()), p.getCreatedAt(), p.getId()));
+            result.add(new PingPongFreq("加转弧圈", getFreq(p.getHighSpinLoopDrive()), getTime(p.getHighSpinLoopDrive()), p.getCreatedAt(), p.getId()));
+            result.add(new PingPongFreq("对抗比赛", getFreq(p.getRace()), getTime(p.getRace()), p.getCreatedAt(), p.getId()));
             return result;
         }
         return null;

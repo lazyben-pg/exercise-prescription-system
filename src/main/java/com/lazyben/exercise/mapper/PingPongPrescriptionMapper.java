@@ -15,6 +15,9 @@ public interface PingPongPrescriptionMapper {
     @Select("SELECT * from pingpong_prescription where userid=#{userId}")
     List<PingPongPrescription> getPingPongPrescriptionByUserId(@Param("userId") int userId);
 
+    @Select("SELECT * from pingpong_prescription where id=#{id}")
+    PingPongPrescription getPingPongPrescriptionById(@Param("id") int id);
+
     @Insert("INSERT INTO pingpong_prescription(userid, forehand_attack, backhand_scoop_pass, backhand_push, fast_loop_drive, high_spin_loop_drive, race, created_at) VALUES(#{userId}, #{forehandAttack}, #{backhandScoopPass},#{backhandPush},#{fastLoopDrive},#{highSpinLoopDrive},#{race}, now())")
     void insertPingPongPrescription(@Param("userId") int userId,
                                     @Param("forehandAttack") String forehandAttack,

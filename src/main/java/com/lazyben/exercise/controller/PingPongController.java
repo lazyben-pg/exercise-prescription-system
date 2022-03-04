@@ -7,6 +7,7 @@ import com.lazyben.exercise.service.AuthService;
 import com.lazyben.exercise.service.PingPongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,5 +39,14 @@ public class PingPongController {
             if (allPingPong == null) return PingPongsResult.success("暂无乒乓球历史处方");
             return PingPongsResult.success("查询成功", allPingPong);
         }).orElse(PingPongsResult.failure("用户未登录"));
+    }
+
+    @GetMapping("/pingpong/get")
+    public PingPongResult getPingPongAllPrescription(@RequestParam("id") int id) {
+        return authService.getCurrentUser().map((loggedInUser) -> {
+            List<PingPongFreq> pingpong = pingPongService.getPingPongById(id, loggedInUser.getId());
+            if (pingpong == null) return PingPongResult.success("找不到相应处方");
+            return PingPongResult.success("查询成功", pingpong);
+        }).orElse(PingPongResult.failure("用户未登录"));
     }
 }
