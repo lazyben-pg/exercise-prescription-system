@@ -86,7 +86,7 @@
       <!--sidebar start-->
      
 
-          
+            
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -109,6 +109,20 @@
                         <span style="font-size:14px">个人体质数据录入</span>
                     </a>
                 </li>
+                
+
+            <li class="sub-menu">
+                <a href="javascript:;" class="">
+                    <i class="icon_piechart"></i>
+                    <span style="font-size:13px" >乒乓球运动处方</span>   
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="basic_table_ks.html"> <span style="font-size:14px">对抗模式   </span></a></li>                          
+                    <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">训练模式  </span></a></li>
+                </ul>
+                </li>  
+
                <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_piechart"></i>
@@ -116,13 +130,14 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
-                    <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
-                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">查看个人运动处方记录  </span></a></li>
+                    <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">个人健康问卷   </span></a></li>                          
+                    <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">个人体质数据  </span></a></li>
+                    <li><a class="" href="basic_table.html"> <span style="font-size:14px">基础健康处方  </span></a></li>
+                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">乒乓球运动处方  </span></a></li>
                 </ul>
-            </li>  
+                </li>  
                            
-               <li class="sub-menu">
+               <!-- <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
                     <span style="font-size:13px">当前运动处方</span>
@@ -132,18 +147,20 @@
                     <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
                     <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                 </ul>
-              </li>  
+              </li>   -->
+
               
               <li>
                 <a class="" href="feedBackQuestion.html">
                     <i class="icon_genius"></i> 
-                    <span style="font-size:14px">个人反馈问卷</span>
+                    <span style="font-size:14px">疲劳反馈问卷</span>
                 </a>
             </li>
             </ul>
             <!-- sidebar menu end-->
         </div>
       </aside>
+
 
 
 
@@ -167,7 +184,7 @@
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
                                 <div class="info-box brown-bg">
-                        <a href="basic_table.html">
+                        <a href="basic_table_zskg.html">
                         <img src="./img/q1.png" style="width:150px;height:100px" >
                                     <div class="count"></div>
                                     <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正手快攻</div>	<br/>	
@@ -180,7 +197,7 @@
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 
                                 <div class="info-box brown-bg">
-                                <a :href="getGoodsHref(2)">
+                                <a  href="basic_table_fskb.html">
                         <img src="./img/q2.png" style="width:150px;height:100px" >
                                     <div class="count"></div>
                                     <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手快拨</div>	<br/>	
@@ -193,7 +210,7 @@
 				
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
                             <div class="info-box brown-bg">
-                    <a :href="getGoodsHref(3)">
+                    <a href="basic_table_fscq.html">
                     <img src="./img/q3.png" style="width:150px;height:100px" >
                     <div class="count"></div>
                     <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反手搓球</div><br/>	
@@ -204,7 +221,7 @@
 				
 				<div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
                                 <div class="info-box brown-bg">
-                        <a :href="getGoodsHref(4)">
+                        <a href="basic_table_qchq.html">
                         <img src="./img/q4.png" style="width:150px;height:100px" >
                         <div class="count"></div>
                         <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前冲弧圈</div><br/>	
@@ -214,7 +231,7 @@
 				</div><!--/.col-->
         <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
 					<div class="info-box brown-bg">
-                        <a :href="getGoodsHref(5)">
+                        <a href="basic_table_jzhq.html">
                         <img src="./img/q5.png" style="width:150px;height:100px" >
                         <div class="count"></div>
                         <div class="title" style="font-size: 18px;">&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加转弧圈</div>	<br/>	

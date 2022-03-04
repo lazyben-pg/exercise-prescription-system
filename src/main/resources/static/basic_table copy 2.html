@@ -80,7 +80,6 @@
         <!--sidebar start-->
 
 
-                
         <aside>
             <div id="sidebar"  class="nav-collapse "  font-size= 5px>
                 <!-- sidebar menu start-->
@@ -103,20 +102,6 @@
                             <span style="font-size:14px">个人体质数据录入</span>
                         </a>
                     </li>
-                    
-    
-                <li class="sub-menu">
-                    <a href="javascript:;" class="">
-                        <i class="icon_piechart"></i>
-                        <span style="font-size:13px" >乒乓球运动处方</span>   
-                        <span class="menu-arrow arrow_carrot-right"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="basic_table_ks.html"> <span style="font-size:14px">对抗模式   </span></a></li>                          
-                        <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">训练模式  </span></a></li>
-                    </ul>
-                    </li>  
-    
                    <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon_piechart"></i>
@@ -124,30 +109,28 @@
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">个人健康问卷   </span></a></li>                          
-                        <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">个人体质数据  </span></a></li>
-                        <li><a class="" href="basic_table.html"> <span style="font-size:14px">基础健康处方  </span></a></li>
-                        <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">乒乓球运动处方  </span></a></li>
+                        <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
+                        <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
+                        <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">查看个人运动处方记录  </span></a></li>
                     </ul>
-                    </li>  
+                </li>  
                                
-                   <!-- <li class="sub-menu">
+                   <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon_document_alt"></i>
                         <span style="font-size:13px">当前运动处方</span>
                         <span class="menu-arrow arrow_carrot-right"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
+                        <li><a class="" href="basic_table_ks.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
                         <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                     </ul>
-                  </li>   -->
-    
+                  </li>  
                   
                   <li>
                     <a class="" href="feedBackQuestion.html">
                         <i class="icon_genius"></i> 
-                        <span style="font-size:14px">疲劳反馈问卷</span>
+                        <span style="font-size:14px">个人反馈问卷</span>
                     </a>
                 </li>
                 </ul>
@@ -162,11 +145,11 @@
             <section class="wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3 class="page-header"><i class="fa fa-table"></i>对抗模式</h3>
+                        <h3 class="page-header"><i class="fa fa-table"></i>个性化运动处方</h3>
                         <ol class="breadcrumb">
                             <li><i class="fa fa-home"></i><a href="index.html">{{symptom}}</a></li>
                             <li><i class="fa fa-table"></i></li>
-                            <li><i class="fa fa-th-list"></i>对抗模式运动处方</li>
+                            <li><i class="fa fa-th-list"></i>运动处方</li>
                         </ol>
                     </div>
                 </div>
@@ -185,23 +168,23 @@
                         <div class="col-sm-8  col-sm-offset-2">
                             <section class="panel">
                                 <header class="panel-heading no-border">
-                                    乒乓球对抗模式处方
+                                    正手快攻处方
                                 </header>
                                 <table class="table table-bordered table-hover">
                                     <tbody>
                                      <tr>
-                                            <td > 对抗时间</td>
-                                            <td>{{actions.action6}}</td>
+                                            <td > 挥拍频率</td>
+                                            <td>{{actions.action1}}次/min</td>
                                      </tr>
                                     <tr>
                                     <td > 强度</td>
                                     
                                     <td v-for="qdu in youyang.qiangdu">{{qdu}}</td>
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                         <td>时间</td>
                                         <td v-for="sjian in youyang.shijian">{{sjian}}</td>
-                                    </tr> -->
+                                    </tr>
                                     <tr>
                                         <td>频率</td>
                                         <td v-for="plv in youyang.pinlv">{{plv}}</td>
@@ -344,8 +327,7 @@
                         action2:'',
                         action3:'',
                         action4:'',
-                        action5:'',
-                        action6:''
+                        action5:''
                 },
 
             },
@@ -404,7 +386,7 @@
                          
                           var info=response.data.data
                           if(response.data.status=='OK'){ 
-                             _this.actions.action6=info[5].time
+                             _this.actions.action1=info[0].freq
                             //  _this.actions.action2=info[1].freq
                             //  _this.actions.action3=info[2].freq
                             //  _this.actions.action4=info[3].freq

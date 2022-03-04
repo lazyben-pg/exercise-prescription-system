@@ -94,15 +94,11 @@
                 </ul>
                 <!-- notificatoin dropdown end-->
             </div>
-      </header>    
-
+     </header>    
       <!--header end-->
+      <!--sidebar start-->  
 
-      <!--sidebar start-->
-      
-
-        
-               
+            
       <aside>
         <div id="sidebar"  class="nav-collapse "  font-size= 5px>
             <!-- sidebar menu start-->
@@ -125,6 +121,20 @@
                         <span style="font-size:14px">个人体质数据录入</span>
                     </a>
                 </li>
+                
+
+            <li class="sub-menu">
+                <a href="javascript:;" class="">
+                    <i class="icon_piechart"></i>
+                    <span style="font-size:13px" >乒乓球运动处方</span>   
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="basic_table_ks.html"> <span style="font-size:14px">对抗模式   </span></a></li>                          
+                    <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">训练模式  </span></a></li>
+                </ul>
+                </li>  
+
                <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_piechart"></i>
@@ -132,13 +142,14 @@
                     <span class="menu-arrow arrow_carrot-right"></span>
                 </a>
                 <ul class="sub">
-                    <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">查看个人健康问卷   </span></a></li>                          
-                    <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">查看个人体质数据  </span></a></li>
-                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">查看个人运动处方记录  </span></a></li>
+                    <li><a class="" href="lookBodyQuestionnareTable.html"> <span style="font-size:14px">个人健康问卷   </span></a></li>                          
+                    <li><a class="" href="lookBodyDataTable.html"> <span style="font-size:14px">个人体质数据  </span></a></li>
+                    <li><a class="" href="basic_table.html"> <span style="font-size:14px">基础健康处方  </span></a></li>
+                    <li><a class="" href="lookAllPrescription.html"> <span style="font-size:14px">乒乓球运动处方  </span></a></li>
                 </ul>
-            </li>  
+                </li>  
                            
-               <li class="sub-menu">
+               <!-- <li class="sub-menu">
                 <a href="javascript:;" class="">
                     <i class="icon_document_alt"></i>
                     <span style="font-size:13px">当前运动处方</span>
@@ -148,12 +159,13 @@
                     <li><a class="" href="basic_table.html"> <span style="font-size:14px">乒乓球对抗模式  </span></a></li>                          
                     <li><a class="" href="trainpingpang.html"> <span style="font-size:14px">乒乓球训练模式   </span></a></li>
                 </ul>
-              </li>  
+              </li>   -->
+
               
               <li>
                 <a class="" href="feedBackQuestion.html">
                     <i class="icon_genius"></i> 
-                    <span style="font-size:14px">个人反馈问卷</span>
+                    <span style="font-size:14px">疲劳反馈问卷</span>
                 </a>
             </li>
             </ul>
@@ -162,328 +174,196 @@
       </aside>
 
 
-      <!--sidebar end-->
 
+      <!--sidebar end-->
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-		  <div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header"><i class="fa fa-files-o"></i> 个人健康调查</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="icon_document_alt"></i>Forms</li>
-						<li><i class="fa fa-files-o"></i>个人反馈问卷</li>
-					</ol>
-				</div>
-			</div>
+                <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="page-header"><i class="fa fa-files-o"></i> 个人健康调查</h3>
+                            <ol class="breadcrumb">
+                                <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                                <li><i class="icon_document_alt"></i>Forms</li>
+                                <li><i class="fa fa-files-o"></i>个人反馈问卷</li>
+                            </ol>
+                        </div>
+                </div>
               <!-- Form validations -->              
-              <div class="row">
-                  <div class="col-lg-12">
-                      <section class="panel">
-                     <!--      <header class="panel-heading">
-                         个人体质健康筛查
-                     </header> -->
-                          <div class="panel-body">
-                              <div class="form">
-                                  <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
-                                      <div class="form-group ">
+               <div class="row">
+                    <div class="col-lg-12">
+                        <section class="panel">
+                        <!--      <header class="panel-heading">
+                            个人体质健康筛查
+                        </header> -->
+                            <div class="panel-body">
+                                <div class="form">
+                                    <form class="form-validate form-horizontal" id="feedback_form" method="get" action="">
+                                            <div class="form-group ">
+                                                <div class="test_main">
+                                                            <div class="nr_left">
+                                                                <div class="test">                             
+                                                                            <div class="test_content">
+                                                                                <div class="test_content_title">
+                                                                                    <h2>个人反馈问卷</h2>
+                                                                                    <p>
+                                                                                        <span>共</span><i class="content_lit">3</i><span>题
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="test_content_nr">
+                                                                                <ul>                                   
+                                                                                        <li id="qu_0_0">
+                                                                                            <div class="test_content_nr_tt">
+                                                                                               <font>请问您使用该运动处方进行运动之后的疲劳感如何？（括号内为疲劳感知量级，从低到高疲劳程度逐渐增大)，自己对待疲劳的感受</font><b class="icon iconfont">&#xe881;</b>
+                                                                                            </div>
+                                                                                            <div class="test_content_nr_main">
+                                                                                                <ul>
+                                                                                                    
+                                                                                                        <li class="option">
+                                                                                                            <input      class="radioOrCheck"   v-model="answer.q1" type="radio" value="6"  name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                                A.
+                                                                                                                <p class="ue" style="display: inline;">安静、不费力（疲劳程度6）</p>
+                                                                                                            </label>
+                                                                                                        </li>
 
+                                                                                                        <li class="option">
+                                                                                                            <input   type="radio"   v-model="answer.q1" type="radio" value="7"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            B.
+                                                                                                            <p class="ue" style="display: inline;">极其轻松（刚刚能察觉到）（疲劳程度7-8）</p>
+                                                                                                            </label>
+                                                                                                    </li>
 
+                                                                                                    <li class="option">
+                                                                                                            <input type="radio"    v-model="answer.q1" type="radio" value="9"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            C.
+                                                                                                                <p class="ue" style="display: inline;">非常轻松（疲劳程度9）</p>
+                                                                                                            </label>
+                                                                                                        </li>
 
-<div class="test_main">
-            <div class="nr_left">
-                <div class="test">
-                    <form action="" method="post">
-                      
-                        
-                            <div class="test_content">
-                                <div class="test_content_title">
-                                    <h2>个人反馈问卷</h2>
-                                    <p>
-                                        <span>共</span><i class="content_lit">3</i><span>题
-                                    </p>
+                                                                                                        <li class="option">
+                                                                                                            <input type="radio"   v-model="answer.q1" type="radio" value="10"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            D.
+                                                                                                                <p class="ue" style="display: inline;">轻松（疲劳程度10-11）</p>
+                                                                                                            </label>
+                                                                                                        </li>
+
+                                                                                                        <li class="option">
+                                                                                                            <input type="radio"   v-model="answer.q1" type="radio" value="13"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            E.
+                                                                                                                <p class="ue" style="display: inline;">有点吃力（疲劳程度12-14）</p>
+                                                                                                            </label>
+                                                                                                        </li>
+
+                                                                                                        <li class="option">
+                                                                                                            <input type="radio"   v-model="answer.q1" type="radio" value="15"    class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            F.
+                                                                                                                <p class="ue" style="display: inline;">费力（吃力）（疲劳程度15）</p>
+                                                                                                            </label>
+                                                                                                        </li>
+
+                                                                                                        <li class="option">
+                                                                                                            <input type="radio"   v-model="answer.q1" type="radio" value="17"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            G.
+                                                                                                                <p class="ue" style="display: inline;">   非常吃力（疲劳程度16-18）  </p>
+                                                                                                            </label>
+                                                                                                        </li>
+
+                                                                                                        <li class="option">
+                                                                                                            <input type="radio"   v-model="answer.q1" type="radio" value="19"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            H.
+                                                                                                                <p class="ue" style="display: inline;"> 极其费力，极其吃力（疲劳程度19） </p>
+                                                                                                            </label>
+                                                                                                        </li>
+                                                                                                        <li class="option">
+                                                                                                        <input type="radio"    v-model="answer.q1" type="radio" value="20"   class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
+                                                                                                            <label for="0_answer_1_option_1">
+                                                                                                            J.
+                                                                                                                <p class="ue" style="display: inline;"> 精疲力竭（疲劳程度20） </p>
+                                                                                                            </label>
+                                                                                                        </li>                                                                     
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </li>                                 
+                                                                                </ul>
+                                                                            </div>
+                                                                                        <!-- 提交 -->
+                                                                    <div class="test_content">
+                                                                        <div class="test_content_title">
+                                                                            <div class="test_title">
+                                                                                <font><input type="button"  v-on:click="send" value="提交"></font>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>                         
+                                                                </div>
+
+                                                            </div>
+                                                        
+                                                </div>
+                                            </div>
+                                        </form>         
                                 </div>
                             </div>
-                            <div class="test_content_nr">
-                                <ul>
-                                    
-                                        <li id="qu_0_0">
-                                            <div class="test_content_nr_tt">
-                                                <i>1</i><span></span><font>请问您使用该运动处方进行运动之后的疲劳感如何？（括号内为疲劳感知量级，从低到高疲劳程度逐渐增大</font><b class="icon iconfont">&#xe881;</b>
-                                            </div>
-
-                                            <div class="test_content_nr_main">
-                                                <ul>
-                                                    
-                                                        <li class="option">
-                                                             <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                             <label for="0_answer_1_option_1">
-                                                                A.
-                                                                <p class="ue" style="display: inline;">毫无感觉（0）</p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                               B.
-                                                               <p class="ue" style="display: inline;">极其轻松（刚刚能察觉到）（0.5）</p>
-                                                            </label>
-                                                       </li>
-
-                                                       <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                               C.
-                                                                <p class="ue" style="display: inline;">非常轻松（1）</p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                              D.
-                                                                <p class="ue" style="display: inline;">轻松（2）</p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                              E.
-                                                                <p class="ue" style="display: inline;">中等（2.5）</p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                               F.
-                                                                <p class="ue" style="display: inline;">费力（吃力）（5）</p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                              G.
-                                                                <p class="ue" style="display: inline;">   非常费力（7）  </p>
-                                                            </label>
-                                                        </li>
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer1"id="0_answer_1_option_1"/>
-                                                            <label for="0_answer_1_option_1">
-                                                               H.
-                                                                <p class="ue" style="display: inline;"> 极其费力（“最大用力”）（10） </p>
-                                                            </label>
-                                                        </li>
-
-                                                        
-                                                    
-                                                       
-                                                    
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    
-                                        <li id="qu_0_1">
-                                            <div class="test_content_nr_tt">
-                                                <i>2</i><span></span><font>请问您使用该运动处方进行运动之后是否有心绞痛？（括号内为疼痛感知量级，从低到高疼痛程度增大）</font><b class="icon iconfont">&#xe881;</b>
-                                            </div>
-
-                                            <div class="test_content_nr_main">
-                                                <ul>
-                                                    
-                                                        <li class="option">
-                                                            
-                                                                <input type="radio" class="radioOrCheck" name="answer2"/>
-                                                            <label for="0_answer_2_option_1">
-                                                                A.
-                                                                <p class="ue" style="display: inline;">无疼痛（0）</p>
-                                                            </label>
-                                                        </li>
-                                                    
-                                                        <li class="option">
-                                                            
-                                                                <input type="radio" class="radioOrCheck" name="answer2"id="0_answer_2_option_2"/>
-                                                            
-                                                            
-                                                            <label for="0_answer_2_option_2">
-                                                                B.
-                                                                <p class="ue" style="display: inline;">轻度，不明显（1）</p>
-                                                            </label>
-                                                        </li>
-                                                    
-                                                        <li class="option">
-                                                            
-                                                                <input type="radio" class="radioOrCheck" name="answer2" id="0_answer_2_option_3"/>
-                                                            
-                                                            
-                                                            <label for="0_answer_2_option_3">
-                                                                C.
-                                                                <p class="ue" style="display: inline;">中度，令人烦恼（2）</p>
-                                                            </label>
-                                                        </li>
-
-
-                                                        <li class="option">
-                                                            
-                                                            <input type="radio" class="radioOrCheck" name="answer2"
-                                                                id="0_answer_2_option_3"
-                                                            />
-                                                        
-                                                        
-                                                        <label for="0_answer_2_option_3">
-                                                            D.
-                                                            <p class="ue" style="display: inline;">中重度，非常不舒服（3）</p>
-                                                        </label>
-                                                    </li>
-
-
-                                                    <li class="option">
-                                                            
-                                                        <input type="radio" class="radioOrCheck" name="answer2"  id="0_answer_2_option_3"/>
-                                                    
-                                                    
-                                                    <label for="0_answer_2_option_3">
-                                                        E.
-                                                        <p class="ue" style="display: inline;">重度，从未经历过的剧烈疼痛（4）</p>
-                                                    </label>
-                                                </li>
-                                                    
-                                                    
-                                                    
-                                                </ul>
-                                            </div>
-                                        </li>
-                                    
-                                        <li id="qu_0_2">
-                                            <div class="test_content_nr_tt">
-                                                <i>3</i><span></span><font>请问您使用该运动处方进行运动之后是否出现呼吸困难现象？（括号内为呼吸困难量级，从低到高呼吸逐渐困难）</font><b class="icon iconfont">&#xe881;</b>
-                                            </div>
-
-                                            <div class="test_content_nr_main">
-                                                <ul>
-                                                    
-                                                        <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="answer3" id="0_answer_3_option_1"/>                                                       
-                                                            <label for="0_answer_3_option_1">
-                                                                A.
-                                                                <p class="ue" style="display: inline;">无呼吸急促（0）</p>
-                                                            </label>
-                                                        </li>
-                                                    
-                                                        <li class="option">
-                                                            
-                                                                <input type="radio" class="radioOrCheck" name="answer3"id="0_answer_3_option_2" />
-                                                            <label for="0_answer_3_option_2">
-                                                                B.
-                                                                <p class="ue" style="display: inline;">轻度，不明显（1）</p>
-                                                            </label>
-                                                        </li>
-                                                    
-                                                        <li class="option">
-                                                                <input type="radio" class="radioOrCheck" name="answer3"   id="0_answer_3_option_3"/>
-                                                            <label for="0_answer_3_option_3">
-                                                                C.
-                                                                <p class="ue" style="display: inline;"> 
-                                                                    中度，令人烦恼（2）  </p>
-                                                            </label>
-                                                        </li>
-
-
-                                                        <li class="option">
-                                                            <input type="radio" class="radioOrCheck" name="answer3"   id="0_answer_3_option_3"/>
-                                                        <label for="0_answer_3_option_3">
-                                                            D.
-                                                            <p class="ue" style="display: inline;"> 
-                                                                中重度，非常不舒服（3）  </p>
-                                                        </label>
-                                                    </li>
-
-                                                    <li class="option">
-                                                        <input type="radio" class="radioOrCheck" name="answer3"   id="0_answer_3_option_3"/>
-                                                    <label for="0_answer_3_option_3">
-                                                        E.
-                                                        <p class="ue" style="display: inline;"> 
-                                                            重度，从未经历过的剧烈呼吸困难（4）</p>
-                                                    </label>
-                                                </li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </li>
-                                </ul>
-                            </div>
-
-                            <!-- 提交 -->
-
-                      <div class="test_content">
-                <div class="test_content_title">
-                    <div class="test_title">
-                <font><input type="button" name="test_jiaojuan" value="提交"></font>
-                       </div>
-
-                </div>
-              </div>          
-
-
-                        
-                    </form>
-                </div>
-
-            </div>
-        
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-  
-                                                </div>
-                                        </div>
-                                      </div>
-                                  </form>
-               </div>
-
-                        
-            </section>
-                  
-     
-              <!-- page end-->
+                        </section> 
+                    </div>
+               </div> 
+         </section>
       </section>
-  </section>
-
-  </div>
-      <!--main content end-->
- 
-  <!-- container section end -->
-
+  </section>  
+</div>
 
   <script src="js/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-      var apiUrl='http://www.myapp.com:8080/humanstature'
+      var apiUrl="http://www.myapp.com:8080/feedback?level="
 
     var loginUrl="login.html"
     var logoutUrl="http://www.myapp.com:8080/auth/logout"
     var checkIsLoginUrl="http://www.myapp.com:8080/auth"
 
+
+
+
       new Vue({
           el: "#feedDataBody",
           data: {
-              username:''
+              username:'',
+              answer: {
+                    q1:'',           
+                }
             
           },
           methods: {
+            send: function () {
+                    console.log("11111");
+                    _this = this
+                    console.log(_this.answer.q1)                   
+                    axios({
+                        url: apiUrl+_this.answer.q1,
+                        method: "get",
+                        data : JSON.stringify(_this.answer.q1),
+                        headers: {
+                            "Content-Type": "application/json;charset=utf-8"
+                        }
+                    }).then(function(response){
+                        console.log(response)
+                      if(response.data.status=='ok'){
+                           alert(response.data.msg)
+                        console.log(response.msg)
+                      }else{
+                        alert(response.data.msg)
+                        console.log(response.data.msg);
+                      }
+                    })
+                },
             logout:function(){
                     axios({
                         url: logoutUrl,
@@ -524,9 +404,6 @@
       })
   </script>
   
-  
-
-
 
     <!-- javascripts -->
     <script src="js/jquery.js"></script>
@@ -541,41 +418,6 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-
-<!-- 问卷 -->
-    <!-- <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/jquery.easy-pie-chart.js"></script>
-    时间js
-    <script src="js/time/jquery.countdown.js"></script>
-    <script>
-        window.jQuery(function($) {
-            "use strict";
-            
-            $('time').countDown({
-                with_separators : false
-            });
-            $('.alt-1').countDown({
-                css_class : 'countdown-alt-1'
-            });
-            $('.alt-2').countDown({
-                css_class : 'countdown-alt-2'
-            });
-            
-        });
-        
-        $(function() {
-            $('li.option label').click(function() {
-            debugger;
-                var examId = $(this).closest('.test_content_nr_main').closest('li').attr('id'); // 得到题目ID
-                var cardLi = $('a[href=#' + examId + ']'); // 根据题目ID找到对应答题卡
-                // 设置已答题
-                if(!cardLi.hasClass('hasBeenAnswer')){
-                    cardLi.addClass('hasBeenAnswer');
-                }
-                
-            });
-        });
-    </script> -->
 
   </body>
 </html>
